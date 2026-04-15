@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benchmark viewer</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div id="app">
+  <header>
+    <h1>Benchmark <span>Viewer</span></h1>
+    <div id="meta-wrap">
+      <div id="meta">Drop a bench_results.json to begin.</div>
+      <div>
+        <button id="theme-toggle" class="file-btn" aria-pressed="false" title="Toggle light / dark theme">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+<div id="drop-zone">
+  <p>Drop <strong>bench_results.json</strong> here, or click to browse</p>
+  <p class="hint">Any Google Benchmark JSON — <code>--benchmark_format=json</code> or the custom reporter</p>
+  <button onclick="document.getElementById('file-input').click()">Choose file</button>
+  <input type="file" id="file-input" accept=".json">
+</div>
+
+<div id="content">
+  <div class="summary-grid" id="summary"></div>
+  <div id="parse-config-wrap" class="parse-config-wrap" hidden>
+    <button id="parse-config-toggle" class="parse-config-toggle" type="button" aria-expanded="false">▶ Parse config</button>
+    <div id="parse-config-panel" class="parse-config-panel" hidden>
+      <p class="parse-config-desc">Choose how benchmark name segments map to hierarchy, series, and x-axis.</p>
+      <div id="parse-config-example" class="parse-config-example">-</div>
+      <div id="parse-config-roles" class="parse-config-roles"></div>
+      <div class="parse-config-actions">
+        <button id="parse-config-apply" class="file-btn" type="button">Apply roles</button>
+        <button id="parse-config-reset" class="file-btn" type="button">Reset auto</button>
+      </div>
+    </div>
+  </div>
+  <div class="tab-bar"      id="tabs"></div>
+  <div                      id="panels"></div>
+</div>
+
+<script type="module" src="js/main.js"></script>
+</div>
+</body>
+</html>
