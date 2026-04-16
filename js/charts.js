@@ -3,7 +3,7 @@
  * Chart creation and helpers that wrap Chart.js usage.
  * Exports small helpers used by `panels.js` and `main.js`.
  */
-import { esc, fmtVal } from './utils.js';
+import { esc, fmtVal, fmtTickNumber } from './utils.js';
 
 // Build a palette on demand so the first color follows the active theme accent.
 export function getColors(){
@@ -61,14 +61,27 @@ export function mkChart(canvas, type, labels, datasets, opts) {
   const colors = getColors();
   const muted = getMuted();
   const gridColor = getGridColor();
+  const xTickFormatter = opts && typeof opts.xTickFormatter === 'function' ? opts.xTickFormatter : null;
+  const yTickFormatter = opts && typeof opts.yTickFormatter === 'function' ? opts.yTickFormatter : null;
   const xScale = {
-    title: { display: !!(opts && opts.xLabel), text: opts && opts.xLabel, color: muted },
+    title: { display: !!(opts && opts.xLabelDisplay), text: opts && opts.xLabel, color: muted },
     grid: { color: gridColor },
     ticks: { autoSkip: false, maxRotation: 40, color: muted },
     ...(opts && opts.xType ? { type: opts.xType } : {}),
     ...(opts && opts.xMin != null ? { min: opts.xMin } : {}),
     ...(opts && opts.xMax != null ? { max: opts.xMax } : {}),
   };
+  if (xTickFormatter) {
+    xScale.ticks = {
+      ...xScale.ticks,
+      callback: v => xTickFormatter(v),
+    };
+  } else if (opts && (opts.xType === 'linear' || opts.xType === 'logarithmic')) {
+    xScale.ticks = {
+      ...xScale.ticks,
+      callback: v => fmtTickNumber(v),
+    };
+  }
   const yScale = {
     title: { display: !!(opts && opts.yLabel), text: opts && opts.yLabel, color: muted },
     grid: { color: gridColor },
@@ -79,6 +92,12 @@ export function mkChart(canvas, type, labels, datasets, opts) {
   };
   if (opts && opts.xLog) xScale.type = 'logarithmic';
   if (opts && opts.yLog) yScale.type = 'logarithmic';
+  if (yTickFormatter) {
+    yScale.ticks = {
+      ...yScale.ticks,
+      callback: v => yTickFormatter(v),
+    };
+  }
   const c = new Chart(canvas, {
     type,
     data: {
@@ -115,155 +134,26 @@ export function mkChart(canvas, type, labels, datasets, opts) {
       }
     }
   });
-  allCharts.push(c);
-
-  // Drag-to-zoom interaction: draw a selection rect and set axis min/max.
+  // Ensure any auxiliary diagonal datasets span the chart scales exactly
   try {
-    if (opts && opts.dragZoom) {
-      const wrap = canvas.parentElement;
-      let selDiv = null;
-      let dragging = false;
-      let startX = 0, startY = 0;
-
-      function createSel() {
-        if (!wrap) return;
-        selDiv = document.createElement('div');
-        selDiv.className = 'zoom-selection';
-        selDiv.style.position = 'absolute';
-        selDiv.style.pointerEvents = 'none';
-        selDiv.style.left = '0px'; selDiv.style.top = '0px';
-        selDiv.style.width = '0px'; selDiv.style.height = '0px';
-        wrap.appendChild(selDiv);
+    c.data.datasets.forEach(ds => {
+      if (!ds || !ds.__auxiliary) return;
+      // expect two points forming a diagonal; map them to current scale mins/maxs
+      if (c.scales && c.scales.x && c.scales.y && Array.isArray(ds.data) && ds.data.length >= 2) {
+        const xmin = c.scales.x.min;
+        const xmax = c.scales.x.max;
+        const ymin = c.scales.y.min;
+        const ymax = c.scales.y.max;
+        // Use the common min/max for square diagonal when available
+        const low = Math.min(xmin, ymin);
+        const high = Math.max(xmax, ymax);
+        ds.data[0] = { x: low, y: low };
+        ds.data[1] = { x: high, y: high };
       }
-
-      canvas.style.cursor = 'crosshair';
-
-      canvas.addEventListener('pointerdown', ev => {
-        if (ev.button === 0) {
-          // left-button: start zoom selection
-          dragging = true;
-          startX = ev.offsetX;
-          startY = ev.offsetY;
-          createSel();
-          try { canvas.setPointerCapture(ev.pointerId); } catch (e) {}
-          return;
-        }
-        // right-button: start panning
-        if (ev.button === 2) {
-          panActive = true;
-          try { canvas.setPointerCapture(ev.pointerId); } catch (e) {}
-          panStartX = ev.offsetX;
-          panStartY = ev.offsetY;
-          // store original axis ranges
-          try {
-            origXMin = c.options.scales && c.options.scales.x ? c.options.scales.x.min : undefined;
-            origXMax = c.options.scales && c.options.scales.x ? c.options.scales.x.max : undefined;
-            origYMin = c.options.scales && c.options.scales.y ? c.options.scales.y.min : undefined;
-            origYMax = c.options.scales && c.options.scales.y ? c.options.scales.y.max : undefined;
-          } catch (e) {}
-        }
-      });
-
-      canvas.addEventListener('pointermove', ev => {
-        if (panActive) {
-          // panning: adjust axis ranges by pixel delta
-          try {
-            const curXVal = c.scales.x.getValueForPixel(ev.offsetX);
-            const startXVal = c.scales.x.getValueForPixel(panStartX);
-            const dx = curXVal - startXVal;
-            if (c.options && c.options.scales && c.options.scales.x) {
-              const oxmin = Number.isFinite(origXMin) ? origXMin : (c.scales.x.min ?? null);
-              const oxmax = Number.isFinite(origXMax) ? origXMax : (c.scales.x.max ?? null);
-              if (oxmin != null && oxmax != null) {
-                c.options.scales.x.min = oxmin - dx;
-                c.options.scales.x.max = oxmax - dx;
-              }
-            }
-            const curYVal = c.scales.y.getValueForPixel(ev.offsetY);
-            const startYVal = c.scales.y.getValueForPixel(panStartY);
-            const dy = curYVal - startYVal;
-            if (c.options && c.options.scales && c.options.scales.y) {
-              const oymin = Number.isFinite(origYMin) ? origYMin : (c.scales.y.min ?? null);
-              const oymax = Number.isFinite(origYMax) ? origYMax : (c.scales.y.max ?? null);
-              if (oymin != null && oymax != null) {
-                c.options.scales.y.min = oymin - dy;
-                c.options.scales.y.max = oymax - dy;
-              }
-            }
-            c.update('none');
-          } catch (e) {}
-          return;
-        }
-        if (!dragging || !selDiv) return;
-        const x = Math.min(startX, ev.offsetX);
-        const y = Math.min(startY, ev.offsetY);
-        const w = Math.abs(ev.offsetX - startX);
-        const h = Math.abs(ev.offsetY - startY);
-        selDiv.style.left = x + 'px';
-        selDiv.style.top = y + 'px';
-        selDiv.style.width = Math.max(1, w) + 'px';
-        selDiv.style.height = Math.max(1, h) + 'px';
-      });
-
-      canvas.addEventListener('pointerup', ev => {
-        if (panActive) {
-          panActive = false;
-          try { canvas.releasePointerCapture(ev.pointerId); } catch (e) {}
-          return;
-        }
-        if (!dragging) return;
-        dragging = false;
-        try { canvas.releasePointerCapture(ev.pointerId); } catch (e) {}
-        if (!selDiv) return;
-        const endX = ev.offsetX;
-        const endY = ev.offsetY;
-        const minPxX = Math.min(startX, endX);
-        const maxPxX = Math.max(startX, endX);
-        const minPxY = Math.min(startY, endY);
-        const maxPxY = Math.max(startY, endY);
-
-        // Only apply zoom if the drag has a sensible size
-        if (Math.abs(maxPxX - minPxX) > 4 && Math.abs(maxPxY - minPxY) > 4) {
-          try {
-              const xMin = c.scales.x.getValueForPixel(minPxX);
-              const xMax = c.scales.x.getValueForPixel(maxPxX);
-              const yMax = c.scales.y.getValueForPixel(minPxY);
-              const yMin = c.scales.y.getValueForPixel(maxPxY);
-              if (c.options && c.options.scales) {
-                if (!c.options.scales.x) c.options.scales.x = {};
-                if (!c.options.scales.y) c.options.scales.y = {};
-                // set exact numeric bounds from pixel mapping (no snapping)
-                c.options.scales.x.min = xMin;
-                c.options.scales.x.max = xMax;
-                c.options.scales.y.min = yMin;
-                c.options.scales.y.max = yMax;
-              }
-              c.update();
-            } catch (e) {}
-        }
-
-        // remove selection rect
-        try { selDiv.remove(); } catch (e) {}
-        selDiv = null;
-      });
-
-      // double-click to reset zoom
-      canvas.addEventListener('dblclick', () => {
-        if (c.options && c.options.scales) {
-          if (c.options.scales.x) { delete c.options.scales.x.min; delete c.options.scales.x.max; }
-          if (c.options.scales.y) { delete c.options.scales.y.min; delete c.options.scales.y.max; }
-        }
-        try { c.update(); } catch (e) {}
-      });
-
-      // prevent context menu on right-click inside canvas to allow panning
-      canvas.addEventListener('contextmenu', ev => ev.preventDefault());
-    }
-  } catch (e) {}
-  // pan state variables (scoped here)
-  let panActive = false;
-  let panStartX = 0, panStartY = 0;
-  let origXMin, origXMax, origYMin, origYMax;
+    });
+    c.update();
+  } catch (e) { /* non-fatal */ }
+  allCharts.push(c);
   return c;
 }
 
@@ -332,17 +222,18 @@ export function legendHtml(datasets) {
       const color = (ds && ds.borderColor && typeof ds.borderColor === 'string')
         ? ds.borderColor
         : colors[i % colors.length];
-      const tip = ds && ds.__hatch
+      const isCompare = !!(ds && ds.__compare);
+      const tip = isCompare && ds.__hatch
         ? `${ds.label} (compare, hatched)`
-        : (ds && ds.__dashed
+        : (isCompare && ds.__dashed
           ? `${ds.label} (compare, dashed)`
           : String(ds && ds.label || 'Series'));
       let dotHtml = '';
-      if (ds && ds.__hatch) {
+      if (isCompare && ds && ds.__hatch) {
         // hatched square using CSS repeating-linear-gradient
         const c = color;
         dotHtml = `<span class="legend-dot" style="background-image:repeating-linear-gradient(45deg, ${c} 0, ${c} 1px, transparent 1px, transparent 4px); border:1px solid ${c}"></span>`;
-      } else if (ds && ds.__dashed) {
+      } else if (isCompare && ds && ds.__dashed) {
         dotHtml = `<span class="legend-dot" style="background:transparent; border:2px dashed ${color}; width:12px; height:8px; display:inline-block;
           vertical-align:middle; border-radius:2px"></span>`;
       } else {
@@ -382,6 +273,11 @@ export function chartCard(titleStr, subStr, heightPx, drawFn) {
   const wrapEl = el.querySelector('.chart-wrap');
   requestAnimationFrame(() => {
     const out = drawFn(canvas);
+    if (out && out.placeholder) {
+      try { legEl.remove(); } catch (e) {}
+      wrapEl.replaceWith(out.placeholder);
+      return;
+    }
     const datasets = Array.isArray(out) ? out : (out && Array.isArray(out.datasets) ? out.datasets : null);
     const chart = out && !Array.isArray(out) ? out.chart : null;
     const legendDatasets = out && !Array.isArray(out) && Array.isArray(out.legendDatasets)
@@ -392,6 +288,10 @@ export function chartCard(titleStr, subStr, heightPx, drawFn) {
       wrapEl.style.height = 'auto';
     }
     if (datasets) {
+      if (out && out.noLegend) {
+        try { legEl.remove(); } catch (e) {}
+        return;
+      }
       legEl.innerHTML = legendHtml(legendDatasets);
       if (chart) bindLegendToggle(legEl, chart);
     }

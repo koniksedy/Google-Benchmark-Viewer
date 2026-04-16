@@ -11,6 +11,14 @@ let baseData = null;
 let compareByGroup = new Map();
 let compareTimestamp = null;
 
+function setBenchmarkActionsVisible(visible) {
+  const display = visible ? '' : 'none';
+  const newViewBtn = document.getElementById('new-view-btn');
+  const compareBtn = document.getElementById('compare-btn');
+  if (newViewBtn) newViewBtn.style.display = display;
+  if (compareBtn) compareBtn.style.display = display;
+}
+
 function resetViewer() {
   destroyAll();
   baseData = null;
@@ -26,6 +34,8 @@ function resetViewer() {
   const compareBtn = document.getElementById('compare-btn');
   const fileInput = document.getElementById('file-input');
   const compareFileInput = document.getElementById('compare-file-input');
+
+  setBenchmarkActionsVisible(false);
 
   if (summary) summary.innerHTML = '';
   if (tabs) tabs.innerHTML = '';
@@ -147,6 +157,7 @@ export function load(data) {
   const compareBtn = document.getElementById('compare-btn');
   if (compareBtn) {
     compareBtn.disabled = false;
+    setBenchmarkActionsVisible(true);
     if (compareByGroup && compareByGroup.size) {
       compareBtn.textContent = 'Clear compare';
       compareBtn.title = 'Clear loaded comparison';

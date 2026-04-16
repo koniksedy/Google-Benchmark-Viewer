@@ -24,6 +24,24 @@ export const unitDiv = { s:1e9, ms:1e6, 'µs':1e3, ns:1 };
 /** Convert a value in nanoseconds to the requested unit. */
 export function toUnit(ns, u) { return ns / (unitDiv[u] || 1); }
 
+/** Convert a value to a finite number when possible; otherwise return null. */
+export function parseNumericValue(v) {
+  if (v === null || v === undefined || v === '') return null;
+  const n = typeof v === 'number' ? v : Number(String(v).trim());
+  return Number.isFinite(n) ? n : null;
+}
+
+/** Format a number with apostrophe thousand separators for axis ticks. */
+export function fmtTickNumber(v) {
+  if (v === null || v === undefined || v === '' || !Number.isFinite(Number(v))) return String(v);
+  const n = Number(v);
+  const sign = n < 0 ? '-' : '';
+  const abs = Math.abs(n);
+  const [intPart, fracPart] = String(abs).split('.');
+  const grouped = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+  return sign + grouped + (fracPart ? '.' + fracPart : '');
+}
+
 /** Format numeric values for tooltips/axes. */
 export function fmtVal(v, unit) {
   if (v === null || v === undefined || isNaN(v)) return '—';

@@ -4,7 +4,7 @@
  * arranging charts + table views and exposes `buildPanel` which returns
  * a DOM node for a benchmark group.
  */
-import { esc, bestUnit, toUnit, fmtNs, fmtCount, parseName, argDims, medianNs } from './utils.js';
+import { esc, bestUnit, toUnit, fmtNs, fmtCount, parseName, argDims, medianNs, parseNumericValue, fmtTickNumber } from './utils.js';
 import { chartCard, mkChart, getColors } from './charts.js';
 
 export function charts0d(group, runs) {
@@ -12,7 +12,7 @@ export function charts0d(group, runs) {
   const unit = bestUnit(medianNs(runs));
   const labels = runs.map(r => r.name.replace(group + '/', '') || group);
   const ds = [{ label: 'CPU time', data: runs.map(r => toUnit(r.real_time_ns, unit)) }];
-  const h = Math.max(160, labels.length * 28 + 60);
+  const h = 320;
   const cards = [chartCard(group, `Time (${unit}) per variant`, h, canvas => {
     const ch = mkChart(canvas, 'bar', labels, ds, { yLabel: unit, yUnit: unit });
     return { datasets: ds, chart: ch };
@@ -36,7 +36,7 @@ export function charts1d(group, runs, dims) {
     const r = lookup.get(v); return r ? toUnit(r.real_time_ns, unit) : null;
   })}];
 
-  const h = 240;
+  const h = 320;
   const cards = [chartCard(group, `Time (${unit})`, h, canvas => {
     const ch = mkChart(canvas, labels.length <= 10 ? 'line' : 'bar', labels, ds,
       { yLabel: unit, yUnit: unit });
@@ -69,7 +69,7 @@ export function charts2d(group, runs, dims) {
     })
   }));
 
-  const cards = [chartCard(group, `Time (${unit}) — series = arg[${i0}], x = arg[${i1}]`, 260, canvas => {
+  const cards = [chartCard(group, `Time (${unit}) — series = arg[${i0}], x = arg[${i1}]`, 320, canvas => {
     const ch = mkChart(canvas, 'line', labels, ds, { yLabel: unit, yUnit: unit });
     return { datasets: ds, chart: ch };
   })];
@@ -343,6 +343,8 @@ export function buildPanel(group, runs, compareRuns = []) {
     overrides: new Map(),
     seriesColorMap: new Map(),
     nextSeriesColorIdx: 0,
+    scatterPair: null,
+    scatterPairPrompting: false,
   };
 
   try {
@@ -717,6 +719,153 @@ export function buildPanel(group, runs, compareRuns = []) {
     return col;
   }
 
+  function axisInfoFromSource(runsSubset, source, depth) {
+    const rawValues = runsSubset.map(r => valueForSource(r, source, depth)).filter(v => v != null && v !== '');
+    const numericValues = rawValues.map(parseNumericValue).filter(v => v != null);
+    const isNumeric = rawValues.length > 0 && numericValues.length === rawValues.length;
+    return {
+      isNumeric,
+      hasPositiveValues: isNumeric && numericValues.every(v => v > 0),
+      numericValues,
+    };
+  }
+
+  function openScatterPairPrompt(seriesOptions, opts = {}) {
+    if (state.scatterPairPrompting) return;
+    state.scatterPairPrompting = true;
+
+    const normalizedOptions = [];
+    const seenSeriesValues = new Set();
+    (Array.isArray(seriesOptions) ? seriesOptions : []).forEach(opt => {
+      const valueRaw = (opt && typeof opt === 'object' && 'value' in opt) ? opt.value : opt;
+      const value = valueRaw == null ? '' : String(valueRaw);
+      if (seenSeriesValues.has(value)) return;
+      seenSeriesValues.add(value);
+
+      const labelRaw = (opt && typeof opt === 'object' && 'label' in opt)
+        ? opt.label
+        : value;
+      const label = (labelRaw == null || String(labelRaw) === '') ? '(none)' : String(labelRaw);
+      normalizedOptions.push({ value, label });
+    });
+    const seriesVals = normalizedOptions.map(o => o.value);
+
+    const onApply = typeof opts.onApply === 'function' ? opts.onApply : null;
+    const onCancel = typeof opts.onCancel === 'function' ? opts.onCancel : null;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'scatter-pair-overlay';
+
+    const box = document.createElement('div');
+    box.className = 'scatter-pair-dialog';
+    box.innerHTML = '<h3>Select two labels for the scatter plot</h3>';
+
+    const desc = document.createElement('p');
+    desc.className = 'scatter-pair-desc';
+    desc.textContent = 'Pick the two series labels to compare on the X and Y axes.';
+    box.appendChild(desc);
+
+    const row = document.createElement('div');
+    row.className = 'scatter-pair-fields';
+
+    const makeField = (labelText, value) => {
+      const wrap = document.createElement('label');
+      wrap.className = 'scatter-pair-field';
+      const span = document.createElement('span');
+      span.textContent = labelText;
+      const sel = document.createElement('select');
+      normalizedOptions.forEach(o => {
+        const opt = document.createElement('option');
+        opt.value = o.value;
+        opt.textContent = o.label;
+        sel.appendChild(opt);
+      });
+      sel.value = value;
+      wrap.appendChild(span);
+      wrap.appendChild(sel);
+      return { wrap, sel };
+    };
+
+    const initialPair = Array.isArray(state.scatterPair) && state.scatterPair.length === 2
+      ? state.scatterPair
+      : [seriesVals[0], seriesVals[1]];
+    const xField = makeField('X label', initialPair[0]);
+    const yField = makeField('Y label', initialPair[1]);
+    row.appendChild(xField.wrap);
+    row.appendChild(yField.wrap);
+    box.appendChild(row);
+
+    const actions = document.createElement('div');
+    actions.className = 'scatter-pair-actions';
+    const err = document.createElement('div');
+    err.className = 'mapping-sub';
+    err.style.marginTop = '2px';
+    err.style.marginBottom = '6px';
+    err.style.color = 'var(--delta-worse-color)';
+    err.style.display = 'none';
+    err.textContent = 'Select two different labels for X and Y.';
+    box.appendChild(err);
+    const apply = document.createElement('button');
+    apply.type = 'button';
+    apply.className = 'file-btn';
+    apply.textContent = 'Apply';
+    const cancel = document.createElement('button');
+    cancel.type = 'button';
+    cancel.className = 'file-btn';
+    cancel.textContent = 'Cancel';
+    actions.appendChild(apply);
+    actions.appendChild(cancel);
+    box.appendChild(actions);
+
+    function close(setPair = false) {
+      state.scatterPairPrompting = false;
+      try { overlay.remove(); } catch (e) {}
+      if (!setPair && state.graphType === 'scatter' && seriesVals.length >= 2) {
+        state.graphType = 'line';
+      }
+    }
+
+    apply.addEventListener('click', () => {
+      const x = xField.sel.value;
+      const y = yField.sel.value;
+      if (x === y) {
+        err.style.display = 'block';
+        return;
+      }
+      err.style.display = 'none';
+      state.scatterPair = [x, y];
+      close(true);
+      if (onApply) {
+        onApply([x, y]);
+      } else {
+        render();
+      }
+    });
+
+    cancel.addEventListener('click', () => {
+      close(false);
+      if (onCancel) {
+        onCancel();
+      } else {
+        render();
+      }
+    });
+
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) {
+        close(false);
+        if (onCancel) {
+          onCancel();
+        } else {
+          render();
+        }
+      }
+    });
+
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
+  }
+
   function buildChartGrid(titleSuffix, runsSubset, compareRunsSubset) {
     if (!runsSubset.length && !(compareRunsSubset && compareRunsSubset.length)) return null;
     const inferred = inferSources(runsSubset, state.depth);
@@ -785,6 +934,12 @@ export function buildPanel(group, runs, compareRuns = []) {
         ...points.map(p => p.sKey),
         ...comparePoints.map(p => p.sKey),
       ]);
+    const baseSeriesKeys = seriesSource === 'none'
+      ? ['']
+      : sortLabels([...new Set(points.map(p => p.sKey))]);
+    const compareSeriesKeys = seriesSource === 'none'
+      ? (comparePoints.length ? [''] : [])
+      : sortLabels([...new Set(comparePoints.map(p => p.sKey))]);
     const seriesLabelMap = new Map();
     [...points, ...comparePoints].forEach(p => {
       if (!seriesLabelMap.has(p.sKey)) seriesLabelMap.set(p.sKey, p.sDisplay);
@@ -804,6 +959,11 @@ export function buildPanel(group, runs, compareRuns = []) {
       compareLookup.set(`${p.sKey}|${p.xKey}`, p.y);
     }
 
+    const xInfo = axisInfoFromSource(runsSubset, xSource, state.depth);
+    const xIsNumeric = xInfo.isNumeric;
+    const xCanLog = xInfo.hasPositiveValues;
+    const xNumericValues = xKeys.map(k => parseNumericValue(k));
+
     function focusValue(raw) {
       if (raw === '' || raw == null) return null;
       const num = Number(raw);
@@ -821,38 +981,43 @@ export function buildPanel(group, runs, compareRuns = []) {
     const grid = document.createElement('div');
     grid.className = 'chart-grid';
 
-    const hasCompare = comparePoints.length > 0;
     const requestedGraphType = state.graphType || 'line';
-    const canScatter = !hasCompare && seriesKeys.length === 2;
-    const effectiveGraphType = (requestedGraphType === 'scatter' && !canScatter)
-      ? 'line'
-      : requestedGraphType;
     const graphLabel =
-      effectiveGraphType === 'histogram' ? 'Histogram'
-      : effectiveGraphType === 'scatter' ? 'Scatter'
-      : effectiveGraphType === 'cactus' ? 'Cactus (cumulative)'
-      : (requestedGraphType === 'scatter' && !canScatter ? 'Line (scatter unavailable)' : 'Line');
+      requestedGraphType === 'histogram' ? 'Histogram'
+      : requestedGraphType === 'scatter' ? 'Scatter'
+      : requestedGraphType === 'cactus' ? 'Cactus (cumulative)'
+      : 'Line';
 
-    grid.appendChild(chartCard(title, `${metricLabel} (${unit}) — ${graphLabel}`, effectiveGraphType === 'scatter' ? 320 : 240, canvas => {
+    grid.appendChild(chartCard(title, `${metricLabel} (${unit}) — ${graphLabel}`, 320, canvas => {
       function buildLineOrHistogramDatasets(asLine) {
         const datasets = [];
+        const numericX = xIsNumeric ? xNumericValues : null;
+        const hasRealPoint = arr => arr.some(v => {
+          if (v == null) return false;
+          if (typeof v === 'object') return v.y != null && Number.isFinite(Number(v.y));
+          return Number.isFinite(Number(v));
+        });
         for (let i = 0; i < seriesKeys.length; i += 1) {
           const sk = seriesKeys[i];
           const baseLabel = sk === '' ? metricLabel : (seriesLabelMap.get(sk) ?? sk);
           const compLabel = baseLabel + ' (compare)';
 
-          const baseData = xKeys.map(xk => {
+          const baseData = xKeys.map((xk, idx) => {
             const ns = lookup.get(`${sk}|${xk}`);
-            return ns != null ? toUnit(ns, unit) : null;
+            if (ns == null) return xIsNumeric ? { x: numericX[idx], y: null } : null;
+            const y = toUnit(ns, unit);
+            return xIsNumeric ? { x: numericX[idx], y } : y;
           });
-          const compData = xKeys.map(xk => {
+          const compData = xKeys.map((xk, idx) => {
             const ns = compareLookup.get(`${sk}|${xk}`);
-            return ns != null ? toUnit(ns, unit) : null;
+            if (ns == null) return xIsNumeric ? { x: numericX[idx], y: null } : null;
+            const y = toUnit(ns, unit);
+            return xIsNumeric ? { x: numericX[idx], y } : y;
           });
 
           const col = colorForSeries(sk);
 
-          if (baseData.some(v => v != null)) {
+          if (hasRealPoint(baseData)) {
             datasets.push({
               label: baseLabel,
               data: baseData,
@@ -864,7 +1029,7 @@ export function buildPanel(group, runs, compareRuns = []) {
             });
           }
 
-          if (compData.some(v => v != null)) {
+          if (hasRealPoint(compData)) {
             if (asLine) {
               datasets.push({
                 label: compLabel,
@@ -875,6 +1040,7 @@ export function buildPanel(group, runs, compareRuns = []) {
                 pointRadius: 2,
                 borderWidth: 2,
                 tension: 0.3,
+                __compare: true,
                 __dashed: true,
               });
             } else {
@@ -906,7 +1072,6 @@ export function buildPanel(group, runs, compareRuns = []) {
 
       function buildCactusDatasets() {
         const datasets = [];
-        let maxLen = 0;
 
         function cumulativePoints(values) {
           let sum = 0;
@@ -935,7 +1100,6 @@ export function buildPanel(group, runs, compareRuns = []) {
 
           const basePoints = cumulativePoints(baseVals);
           const compPoints = cumulativePoints(compVals);
-          maxLen = Math.max(maxLen, basePoints.length, compPoints.length);
 
           if (basePoints.length) {
             datasets.push({
@@ -958,35 +1122,84 @@ export function buildPanel(group, runs, compareRuns = []) {
               borderWidth: 2,
               pointRadius: 0,
               tension: 0.15,
+              __compare: true,
               __dashed: true,
             });
           }
         }
 
-        return { datasets, maxLen };
+        return { datasets };
       }
 
       function buildScatter() {
-        if (seriesKeys.length < 2) return { datasets: [], legendDatasets: [], xLabel: null, yLabel: null, square: true };
-        let sx, sy;
-        if (Array.isArray(state.scatterPair) && state.scatterPair.length === 2
-            && seriesKeys.includes(state.scatterPair[0]) && seriesKeys.includes(state.scatterPair[1])) {
-          sx = state.scatterPair[0];
-          sy = state.scatterPair[1];
-        } else {
-          sx = seriesKeys[0];
-          sy = seriesKeys[1];
+        const hasCompareChoices = compareSeriesKeys.length > 0;
+        const scatterOptions = [];
+        const addScatterOption = (source, sk) => {
+          const baseLabel = sk === '' ? metricLabel : (seriesLabelMap.get(sk) ?? sk);
+          const value = `${source}::${sk}`;
+          let label = baseLabel;
+          if (source === 'compare') label = `${baseLabel} (compare)`;
+          else if (hasCompareChoices) label = `${baseLabel} (base)`;
+          scatterOptions.push({ value, label });
+        };
+        baseSeriesKeys.forEach(sk => addScatterOption('base', sk));
+        compareSeriesKeys.forEach(sk => addScatterOption('compare', sk));
+
+        if (scatterOptions.length < 2) {
+          return { message: 'Scatter needs at least two labels.', datasets: [], legendDatasets: [], xLabel: null, yLabel: null, square: false };
         }
-        const sxLabel = sx === '' ? metricLabel : (seriesLabelMap.get(sx) ?? sx);
-        const syLabel = sy === '' ? metricLabel : (seriesLabelMap.get(sy) ?? sy);
+
+        const validScatterValues = new Set(scatterOptions.map(o => o.value));
+        const parseChoice = raw => {
+          const s = String(raw == null ? '' : raw);
+          if (s.startsWith('compare::')) return { source: 'compare', key: s.slice('compare::'.length), raw: s };
+          if (s.startsWith('base::')) return { source: 'base', key: s.slice('base::'.length), raw: s };
+          // Backward compatibility for older temporary selections.
+          return { source: 'base', key: s, raw: `base::${s}` };
+        };
+        const labelForChoice = choice => {
+          const found = scatterOptions.find(o => o.value === choice.raw);
+          if (found) return found.label;
+          const fallbackBase = choice.key === '' ? metricLabel : (seriesLabelMap.get(choice.key) ?? choice.key);
+          return choice.source === 'compare' ? `${fallbackBase} (compare)` : fallbackBase;
+        };
+
+        let sx;
+        let sy;
+        const pairValid = Array.isArray(state.scatterPair)
+          && state.scatterPair.length === 2
+          && validScatterValues.has(String(state.scatterPair[0]))
+          && validScatterValues.has(String(state.scatterPair[1]))
+          && state.scatterPair[0] !== state.scatterPair[1];
+
+        if (pairValid) {
+          sx = String(state.scatterPair[0]);
+          sy = String(state.scatterPair[1]);
+        } else if (scatterOptions.length === 2) {
+          sx = scatterOptions[0].value;
+          sy = scatterOptions[1].value;
+          state.scatterPair = [sx, sy];
+        } else {
+          openScatterPairPrompt(scatterOptions);
+          return { message: 'Select two labels to build the scatter plot.', datasets: [], legendDatasets: [], xLabel: null, yLabel: null, square: false };
+        }
+
+        const sxChoice = parseChoice(sx);
+        const syChoice = parseChoice(sy);
+        const sxLabel = labelForChoice(sxChoice);
+        const syLabel = labelForChoice(syChoice);
+        const valueForChoice = (choice, xk) => {
+          const map = choice.source === 'compare' ? compareLookup : lookup;
+          return map.get(`${choice.key}|${xk}`);
+        };
         const pts = xKeys.map(xk => {
-          const xNs = lookup.get(`${sx}|${xk}`);
-          const yNs = lookup.get(`${sy}|${xk}`);
+          const xNs = valueForChoice(sxChoice, xk);
+          const yNs = valueForChoice(syChoice, xk);
           if (xNs == null || yNs == null) return null;
           return { x: toUnit(xNs, unit), y: toUnit(yNs, unit) };
         }).filter(Boolean);
 
-        if (!pts.length) return { datasets: [], legendDatasets: [], xLabel: null, yLabel: null, square: true };
+        if (!pts.length) return { message: 'No shared data points were found for the selected labels.', datasets: [], legendDatasets: [], xLabel: null, yLabel: null, square: false };
 
         let minVal = Infinity;
         let maxVal = -Infinity;
@@ -994,8 +1207,8 @@ export function buildPanel(group, runs, compareRuns = []) {
           minVal = Math.min(minVal, p.x, p.y);
           maxVal = Math.max(maxVal, p.x, p.y);
         });
-        const lower = focus.xMin != null ? focus.xMin : (focus.yMin != null ? focus.yMin : minVal);
-        const upper = focus.xMax != null ? focus.xMax : (focus.yMax != null ? focus.yMax : maxVal);
+        const lower = Number.isFinite(focus.xMin) ? focus.xMin : (Number.isFinite(focus.yMin) ? focus.yMin : minVal);
+        const upper = Number.isFinite(focus.xMax) ? focus.xMax : (Number.isFinite(focus.yMax) ? focus.yMax : maxVal);
         minVal = Number.isFinite(lower) ? lower : minVal;
         maxVal = Number.isFinite(upper) ? upper : maxVal;
         if (!Number.isFinite(minVal) || !Number.isFinite(maxVal)) {
@@ -1013,81 +1226,95 @@ export function buildPanel(group, runs, compareRuns = []) {
           maxVal += pad;
         }
 
-        const col = colorForSeries(`${sx}|${sy}|scatter`);
+        const col = colorForSeries(`${sxChoice.raw}|${syChoice.raw}|scatter`);
         const mainDataset = {
           label: `${syLabel} vs ${sxLabel}`,
           data: pts,
-          borderColor: col,
-          backgroundColor: col + '66',
-          pointRadius: 4,
+          borderColor: '#000000',
+          backgroundColor: '#000000',
+          borderWidth: 1,
+          pointRadius: 5,
+          pointHoverRadius: 6,
+          pointStyle: 'crossRot',
+          pointBackgroundColor: '#000000',
+          pointBorderColor: '#000000',
+          pointBorderWidth: 2,
           showLine: false,
         };
         const diagDataset = {
           label: 'y = x',
           data: [{ x: minVal, y: minVal }, { x: maxVal, y: maxVal }],
-          borderColor: getComputedStyle(document.body).getPropertyValue('--muted').trim() || '#5c6880',
+          borderColor: '#d33',
           backgroundColor: 'transparent',
           borderDash: [6, 4],
           pointRadius: 0,
-          borderWidth: 1.5,
+          borderWidth: 2,
           showLine: true,
           fill: false,
           tension: 0,
           __auxiliary: true,
+          __compare: true,
         };
 
         return {
           datasets: [mainDataset, diagDataset],
           legendDatasets: [mainDataset],
-          xLabel: `${sxLabel} (${unit})`,
-          yLabel: `${syLabel} (${unit})`,
-          square: true,
-          xMin: focus.xMin != null ? focus.xMin : minVal,
-          xMax: focus.xMax != null ? focus.xMax : maxVal,
-          yMin: focus.yMin != null ? focus.yMin : minVal,
-          yMax: focus.yMax != null ? focus.yMax : maxVal,
+          noLegend: true,
+          xLabel: sxLabel,
+          yLabel: syLabel,
+          xLabelDisplay: true,
+          yLabelDisplay: true,
+          square: false,
+          xMin: minVal,
+          xMax: maxVal,
+          yMin: minVal,
+          yMax: maxVal,
+          xTickFormatter: fmtTickNumber,
+          yTickFormatter: fmtTickNumber,
         };
       }
 
-      function numericBound(v) {
-        return Number.isFinite(v) ? v : null;
-      }
-
+      const chartBase = { yLabel: unit, yUnit: unit };
       let chartType = 'line';
-      let chartLabels = labels;
+      let chartLabels = xIsNumeric ? [] : labels;
       let datasets = [];
       let legendDatasets = null;
-      let opts = { yLabel: unit, yUnit: unit };
+      let opts = { ...chartBase };
       let square = false;
+      let chartMessage = '';
+      let hideLegend = false;
 
-      if (effectiveGraphType === 'histogram') {
+      if (requestedGraphType === 'histogram') {
         chartType = 'bar';
         datasets = buildLineOrHistogramDatasets(false);
         opts = {
-          yLabel: unit,
-          yUnit: unit,
-          xType: 'category',
+          ...chartBase,
+          xType: xIsNumeric ? (state.logX && xCanLog ? 'logarithmic' : 'linear') : 'category',
           yLog: state.logY,
-          dragZoom: true,
         };
-      } else if (effectiveGraphType === 'scatter') {
+      } else if (requestedGraphType === 'scatter') {
         chartType = 'scatter';
         chartLabels = [];
         const scatter = buildScatter();
         datasets = scatter.datasets;
         legendDatasets = scatter.legendDatasets;
         square = !!scatter.square;
+        chartMessage = scatter.message || '';
+        hideLegend = !!scatter.noLegend;
         opts = {
           xLabel: scatter.xLabel,
           yLabel: scatter.yLabel,
-          yUnit: unit,
+          xLabelDisplay: true,
+          yLabelDisplay: true,
           xType: state.logX ? 'logarithmic' : 'linear',
           yType: state.logY ? 'logarithmic' : 'linear',
-          maintainAspectRatio: true,
-          aspectRatio: 1,
-          dragZoom: true,
+          // Keep the same fixed card height as other plots; do not force
+          // square canvas scaling, which can blur the scatter plot.
+          maintainAspectRatio: false,
+          xTickFormatter: scatter.xTickFormatter,
+          yTickFormatter: scatter.yTickFormatter,
         };
-      } else if (effectiveGraphType === 'cactus') {
+      } else if (requestedGraphType === 'cactus') {
         chartType = 'line';
         const cactus = buildCactusDatasets();
         chartLabels = [];
@@ -1098,22 +1325,27 @@ export function buildPanel(group, runs, compareRuns = []) {
           yUnit: unit,
           xType: state.logX ? 'logarithmic' : 'linear',
           yType: state.logY ? 'logarithmic' : 'linear',
-          dragZoom: true,
         };
       } else {
         chartType = 'line';
         datasets = buildLineOrHistogramDatasets(true);
         opts = {
-          yLabel: unit,
-          yUnit: unit,
-          xType: 'category',
+          ...chartBase,
+          xType: xIsNumeric ? (state.logX && xCanLog ? 'logarithmic' : 'linear') : 'category',
           yLog: state.logY,
-          dragZoom: true,
+          xLabel: xIsNumeric ? String(xSource) : undefined,
         };
       }
 
+      if (chartMessage) {
+        const msg = document.createElement('div');
+        msg.className = 'chart-message-box';
+        msg.textContent = chartMessage;
+        return { datasets: [], legendDatasets: null, chart: null, square, message: chartMessage, placeholder: msg };
+      }
+
       const ch = mkChart(canvas, chartType, chartLabels, datasets, opts);
-      return { datasets, legendDatasets, chart: ch, square };
+      return { datasets, legendDatasets, chart: ch, square, noLegend: hideLegend };
     }));
 
     return grid;
@@ -1155,7 +1387,7 @@ export function buildPanel(group, runs, compareRuns = []) {
     );
   }
 
-  function buildGraphDisplayStudio(scatterAllowed) {
+  function buildGraphDisplayStudio(scatterOptions, xLogAvailable) {
     const studio = document.createElement('div');
     studio.className = 'mapping-studio graph-display-studio';
 
@@ -1172,34 +1404,52 @@ export function buildPanel(group, runs, compareRuns = []) {
     tools.className = 'mapping-head-tools';
     head.appendChild(tools);
 
-    // toggle buttons (left of graph type)
     const toggleBar = document.createElement('div');
     toggleBar.className = 'graph-toggle-row';
     tools.appendChild(toggleBar);
 
-    function addToggleButton(label, key, title, disabled = false) {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'graph-toggle-btn' + (state[key] ? ' active' : '');
-      btn.disabled = disabled;
-      btn.title = title;
-      btn.textContent = label;
-      btn.addEventListener('click', () => {
-        if (btn.disabled) return;
-        state[key] = !state[key];
-        btn.classList.toggle('active', state[key]);
+    function addToggleSwitch(label, key, title, disabled = false) {
+      const wrap = document.createElement('label');
+      wrap.className = 'graph-toggle-switch';
+      if (disabled) wrap.classList.add('disabled');
+
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.checked = !!state[key];
+      input.disabled = disabled;
+      input.title = title;
+      input.addEventListener('change', () => {
+        state[key] = input.checked;
         render();
       });
-      toggleBar.appendChild(btn);
+
+      const track = document.createElement('span');
+      track.className = 'graph-toggle-track';
+      const thumb = document.createElement('span');
+      thumb.className = 'graph-toggle-thumb';
+      track.appendChild(thumb);
+
+      const text = document.createElement('span');
+      text.className = 'graph-toggle-text';
+      text.textContent = label;
+
+      wrap.appendChild(input);
+      wrap.appendChild(track);
+      wrap.appendChild(text);
+      toggleBar.appendChild(wrap);
     }
 
-    addToggleButton('Log x', 'logX', 'Use a logarithmic x axis where the selected graph type supports numeric x values', false);
-    addToggleButton('Log y', 'logY', 'Use a logarithmic y axis', false);
+    addToggleSwitch('Log x', 'logX', xLogAvailable
+      ? 'Use a logarithmic x axis when the x data are numeric and positive'
+      : 'Log x is available only when the x data are numeric', !xLogAvailable);
+    if (!xLogAvailable) state.logX = false;
+    addToggleSwitch('Log y', 'logY', 'Use a logarithmic y axis');
 
     const graphWrap = document.createElement('label');
     graphWrap.className = 'mapping-ydata';
     graphWrap.innerHTML = '<span>Graph type</span>';
     const graphSel = document.createElement('select');
+    const scatterRepickValue = '__scatter_repick__';
     [
       ['line', 'Standard line'],
       ['histogram', 'Histogram'],
@@ -1209,54 +1459,64 @@ export function buildPanel(group, runs, compareRuns = []) {
       const opt = document.createElement('option');
       opt.value = value;
       opt.textContent = text;
+      if (value === 'scatter' && scatterOptions.length < 2) opt.disabled = true;
       graphSel.appendChild(opt);
     });
-    graphSel.value = state.graphType;
+
+    // Hidden sentinel value used only while scatter is active.
+    // It lets selecting visible "Scatter plot" fire `change` again so
+    // users can re-open the pair prompt without a separate button.
+    const repickOpt = document.createElement('option');
+    repickOpt.value = scatterRepickValue;
+    repickOpt.textContent = 'Scatter plot';
+    repickOpt.hidden = true;
+    graphSel.appendChild(repickOpt);
+
+    if (state.graphType === 'scatter' && scatterOptions.length >= 2) {
+      graphSel.value = scatterRepickValue;
+    } else {
+      graphSel.value = state.graphType;
+      if (state.graphType === 'scatter' && scatterOptions.length < 2) graphSel.value = 'line';
+    }
     graphSel.title = 'Choose graph type';
     graphSel.addEventListener('change', () => {
-      state.graphType = graphSel.value;
+      const nextType = graphSel.value;
+      const prevType = state.graphType;
+
+      if (nextType === scatterRepickValue) {
+        graphSel.value = prevType === 'scatter' ? scatterRepickValue : prevType;
+        return;
+      }
+
+      // Open chooser only when scatter is actually selected.
+      // Keep current chart displayed until user confirms the pair.
+      if (nextType === 'scatter' && scatterOptions.length > 2) {
+        graphSel.value = prevType === 'scatter' ? scatterRepickValue : prevType;
+        openScatterPairPrompt(scatterOptions, {
+          onApply: () => {
+            state.graphType = 'scatter';
+            graphSel.value = scatterRepickValue;
+            render();
+          },
+          onCancel: () => {
+            graphSel.value = state.graphType === 'scatter' ? scatterRepickValue : state.graphType;
+          },
+        });
+        return;
+      }
+
+      state.graphType = nextType;
       render();
     });
     graphWrap.appendChild(graphSel);
     tools.appendChild(graphWrap);
 
-    const focusHint = document.createElement('div');
-    focusHint.className = 'mapping-sub';
-    focusHint.style.marginTop = '8px';
-    focusHint.textContent = 'Tip: drag on a chart to zoom; double-click to reset.';
-    studio.appendChild(focusHint);
-
-    // if more than two distinct series are present, offer pair selectors
-    // seriesVals is provided by caller (render) when available
-    if (Array.isArray(arguments[1]) && arguments[1].length > 2) {
-      const seriesVals = arguments[1];
-      const pairWrap = document.createElement('div');
-      pairWrap.className = 'controls';
-      pairWrap.style.gap = '8px';
-
-      const spanX = document.createElement('label');
-      spanX.className = 'mapping-ydata';
-      spanX.innerHTML = '<span>X series</span>';
-      const selX = document.createElement('select');
-      seriesVals.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; selX.appendChild(o); });
-      spanX.appendChild(selX);
-      pairWrap.appendChild(spanX);
-
-      const spanY = document.createElement('label');
-      spanY.className = 'mapping-ydata';
-      spanY.innerHTML = '<span>Y series</span>';
-      const selY = document.createElement('select');
-      seriesVals.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; selY.appendChild(o); });
-      spanY.appendChild(selY);
-      pairWrap.appendChild(spanY);
-
-      if (!Array.isArray(state.scatterPair) || state.scatterPair.length !== 2) state.scatterPair = [seriesVals[0], seriesVals[1]];
-      selX.value = state.scatterPair[0];
-      selY.value = state.scatterPair[1];
-      selX.addEventListener('change', () => { state.scatterPair[0] = selX.value; render(); });
-      selY.addEventListener('change', () => { state.scatterPair[1] = selY.value; render(); });
-
-      studio.appendChild(pairWrap);
+    if (state.graphType === 'scatter' && scatterOptions.length < 2) {
+      const note = document.createElement('div');
+      note.className = 'mapping-sub';
+      note.style.marginTop = '6px';
+      note.textContent = 'Scatter plot needs at least two labels.';
+      studio.appendChild(note);
     }
 
     return studio;
@@ -1435,24 +1695,63 @@ export function buildPanel(group, runs, compareRuns = []) {
     const { bar, filteredRuns, filteredCompareRuns } = buildSubtypeFilterBar();
 
     const inferred = inferSources(filteredRuns, state.depth);
+    const xSource = state.xSource === 'auto' ? inferred.xSource : state.xSource;
+    const xInfo = axisInfoFromSource(filteredRuns, xSource, state.depth);
+    const xLogAvailable = (xInfo.isNumeric && xInfo.hasPositiveValues)
+      || state.graphType === 'scatter'
+      || state.graphType === 'cactus';
+    if (!xLogAvailable) state.logX = false;
+
     const seriesSource = state.seriesSource === 'auto' ? inferred.seriesSource : state.seriesSource;
-    const seriesVals = seriesSource === 'none'
-      ? ['']
-      : sortLabels([...new Set(filteredRuns.map(r => {
-        const raw = valueForSource(r, seriesSource, state.depth);
-        const s = raw == null ? '' : String(raw);
-        return s === '' ? '(none)' : s;
-      }))]);
-    const uniqueSeries = seriesVals.length;
-    const scatterAllowed = (filteredCompareRuns || []).length === 0 && uniqueSeries >= 2;
-    if (state.graphType === 'scatter' && !scatterAllowed) state.graphType = 'line';
+    const metricLabel = state.metric === 'cpu_time_ns' ? 'CPU time' : 'Wall time';
+    const hasCompareData = !!(filteredCompareRuns && filteredCompareRuns.length);
+    const scatterOptions = seriesSource === 'none'
+      ? (() => {
+        const opts = [{ value: 'base::', label: hasCompareData ? `${metricLabel} (base)` : metricLabel }];
+        if (hasCompareData) opts.push({ value: 'compare::', label: `${metricLabel} (compare)` });
+        return opts;
+      })()
+      : (() => {
+        const values = [];
+        const seen = new Set();
+        const addFromRuns = (srcRuns, source) => {
+          (srcRuns || []).forEach(r => {
+            const raw = valueForSource(r, seriesSource, state.depth);
+            const sRaw = raw == null ? '' : String(raw);
+            const seriesKey = sRaw === '' ? '(none)' : sRaw;
+            const value = `${source}::${seriesKey}`;
+            if (seen.has(value)) return;
+            seen.add(value);
+            const mapKey = `${seriesSource}::${sRaw}`;
+            const mapped = state.overrides.has(mapKey) ? state.overrides.get(mapKey) : sRaw;
+            const baseLabel = (mapped == null || mapped === '') ? '(none)' : String(mapped);
+            const label = source === 'compare'
+              ? `${baseLabel} (compare)`
+              : (hasCompareData ? `${baseLabel} (base)` : baseLabel);
+            values.push({ value, label });
+          });
+        };
+        addFromRuns(filteredRuns, 'base');
+        addFromRuns(filteredCompareRuns, 'compare');
+
+        values.sort((a, b) => {
+          const av = String(a.value).replace(/^base::|^compare::/, '');
+          const bv = String(b.value).replace(/^base::|^compare::/, '');
+          const na = Number(av);
+          const nb = Number(bv);
+          if (!isNaN(na) && !isNaN(nb)) return na - nb;
+          return String(a.label).localeCompare(String(b.label));
+        });
+        return values;
+      })();
+    if (state.graphType === 'scatter' && scatterOptions.length < 2) state.graphType = 'line';
 
     if (bar) {
       content.appendChild(bar);
     }
 
     const graphBuckets = subtypeBuckets(filteredRuns, filteredCompareRuns);
-    const graphStudio = buildGraphDisplayStudio(scatterAllowed, seriesVals);
+    const graphStudio = buildGraphDisplayStudio(scatterOptions, xLogAvailable);
     content.appendChild(graphStudio);
 
     const grid = document.createElement('div');
@@ -1469,7 +1768,6 @@ export function buildPanel(group, runs, compareRuns = []) {
 
     if (cardCount === 1) grid.classList.add('single');
     if (cardCount > 0) content.appendChild(grid);
-    const xSource = state.xSource === 'auto' ? inferred.xSource : state.xSource;
     // For the raw grouped view we show all subtype1 groups from the
     // original runs (not the dropdown-filtered subset) so users can
     // always see every subtype value irrespective of higher-level

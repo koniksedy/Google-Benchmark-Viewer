@@ -1,0 +1,14 @@
+.chart-wrap.square {
+  height: 0 !important;
+  padding-bottom: 100%;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+}
+.chart-wrap.square canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
