@@ -4,13 +4,49 @@
  * theme toggle) and orchestrates loading benchmark JSON into the UI.
  */
 import { destroyAll, updateChartColors, updateLegends } from './charts.js';
-import { groupByPrefix, medianNs, parseName, esc, fmtNs } from './utils.js';
+import { groupByPrefix, esc, fmtNs } from './utils.js';
 import { buildPanel } from './panels.js';
 
-export function load(data) {
-  destroyAll();
+let baseData = null;
+let compareByGroup = new Map();
+let compareTimestamp = null;
 
+function resetViewer() {
+  destroyAll();
+  baseData = null;
+  compareByGroup = new Map();
+  compareTimestamp = null;
+
+  const summary = document.getElementById('summary');
+  const tabs = document.getElementById('tabs');
+  const panels = document.getElementById('panels');
+  const content = document.getElementById('content');
+  const dropZone = document.getElementById('drop-zone');
+  const meta = document.getElementById('meta');
+  const compareBtn = document.getElementById('compare-btn');
+  const fileInput = document.getElementById('file-input');
+  const compareFileInput = document.getElementById('compare-file-input');
+
+  if (summary) summary.innerHTML = '';
+  if (tabs) tabs.innerHTML = '';
+  if (panels) panels.innerHTML = '';
+  if (content) content.style.display = 'none';
+  if (dropZone) dropZone.style.display = 'block';
+  if (meta) meta.textContent = 'Drop a bench_results.json to begin.';
+
+  if (compareBtn) {
+    compareBtn.disabled = true;
+    compareBtn.textContent = 'Compare';
+    compareBtn.title = 'Load compare benchmark JSON';
+  }
+
+  if (fileInput) fileInput.value = '';
+  if (compareFileInput) compareFileInput.value = '';
+}
+
+function normalizeBenchmarks(data) {
   const benchmarks = (data.benchmarks || []).filter(r => !r.is_aggregate && r.name);
+
   function timeToNs(val, unit) {
     if (val == null) return null;
     switch ((unit || '').toLowerCase()) {
@@ -32,14 +68,24 @@ export function load(data) {
       }
     }
   }
+
+  return benchmarks;
+}
+
+export function load(data) {
+  destroyAll();
+  baseData = data;
+  const benchmarks = normalizeBenchmarks(data);
   if (!benchmarks.length) {
     alert('No non-aggregate benchmark runs found in this file.');
     return;
   }
 
   const ctx = data.context || {};
+  const baseTimestamp = data.timestamp || (ctx && ctx.date) || 'no timestamp';
+  const comparedText = compareTimestamp ? ` vs ${compareTimestamp} (compared)` : '';
   document.getElementById('meta').innerHTML =
-    `${esc(data.timestamp || (ctx && ctx.date) || 'no timestamp')} · ${ctx.num_cpus || '?'} CPUs @ ${ctx.mhz_per_cpu || '?'} MHz`;
+    `${esc(baseTimestamp)}${esc(comparedText)} · ${ctx.num_cpus || '?'} CPUs @ ${ctx.mhz_per_cpu || '?'} MHz`;
 
   const allNs   = benchmarks.map(r => r.real_time_ns);
   const fastest = benchmarks.reduce((a, b) => a.real_time_ns < b.real_time_ns ? a : b);
@@ -79,7 +125,8 @@ export function load(data) {
     if (first) btn.classList.add('active');
     tabBar.appendChild(btn);
 
-    const panel = buildPanel(group, runs);
+    const compareRuns = compareByGroup.get(group) || [];
+    const panel = buildPanel(group, runs, compareRuns);
     if (first) panel.classList.add('active');
     panelsEl.appendChild(panel);
     first = false;
@@ -96,9 +143,21 @@ export function load(data) {
 
   document.getElementById('drop-zone').style.display = 'none';
   document.getElementById('content').style.display   = 'block';
+
+  const compareBtn = document.getElementById('compare-btn');
+  if (compareBtn) {
+    compareBtn.disabled = false;
+    if (compareByGroup && compareByGroup.size) {
+      compareBtn.textContent = 'Clear compare';
+      compareBtn.title = 'Clear loaded comparison';
+    } else {
+      compareBtn.textContent = 'Compare';
+      compareBtn.title = 'Load compare benchmark JSON';
+    }
+  }
 }
 
-function readFile(file) {
+function readBenchmarkFile(file) {
   const r = new FileReader();
   r.onload = e => {
     try { load(JSON.parse(e.target.result)); }
@@ -107,18 +166,84 @@ function readFile(file) {
   r.readAsText(file);
 }
 
+function readCompareFile(file) {
+  const r = new FileReader();
+  r.onload = e => {
+    try {
+      if (!baseData) {
+        alert('Load a base benchmark file first.');
+        return;
+      }
+      const compareData = JSON.parse(e.target.result);
+      const compareRuns = normalizeBenchmarks(compareData);
+      if (!compareRuns.length) {
+        alert('No non-aggregate benchmark runs found in compare file.');
+        return;
+      }
+
+      const baseNames = new Set(normalizeBenchmarks(baseData).map(x => x.name));
+      const sharedCount = compareRuns.reduce((c, r0) => c + (baseNames.has(r0.name) ? 1 : 0), 0);
+      if (!sharedCount) {
+        alert('Compare file does not share benchmark names with the loaded base file.');
+        return;
+      }
+
+      compareByGroup = groupByPrefix(compareRuns);
+      compareTimestamp = compareData.timestamp || (compareData.context && compareData.context.date) || 'no timestamp';
+      load(baseData);
+
+      const compareBtn = document.getElementById('compare-btn');
+      if (compareBtn) {
+        compareBtn.textContent = 'Clear compare';
+        compareBtn.title = 'Clear loaded comparison';
+      }
+    }
+    catch (err) {
+      alert('Could not parse compare JSON: ' + err.message);
+    }
+  };
+  r.readAsText(file);
+}
+
 // wire file input and drag/drop
 const fileInput = document.getElementById('file-input');
-fileInput.addEventListener('change', e => { if (e.target.files[0]) readFile(e.target.files[0]); });
+fileInput.addEventListener('change', e => { if (e.target.files[0]) readBenchmarkFile(e.target.files[0]); });
 const dz = document.getElementById('drop-zone');
 dz.addEventListener('dragover',  e => { e.preventDefault(); dz.classList.add('over'); });
 dz.addEventListener('dragleave', ()  => dz.classList.remove('over'));
-dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('over'); if (e.dataTransfer.files[0]) readFile(e.dataTransfer.files[0]); });
+dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('over'); if (e.dataTransfer.files[0]) readBenchmarkFile(e.dataTransfer.files[0]); });
 dz.addEventListener('click', e => { if (e.target.tagName !== 'BUTTON') fileInput.click(); });
+
+const compareBtn = document.getElementById('compare-btn');
+const compareFileInput = document.getElementById('compare-file-input');
+if (compareBtn && compareFileInput) {
+  compareBtn.addEventListener('click', () => {
+    // if a compare is loaded, use this button to clear it; otherwise open file picker
+    if (compareByGroup && compareByGroup.size) {
+      compareByGroup = new Map();
+      compareTimestamp = null;
+      if (baseData) load(baseData);
+      compareBtn.textContent = 'Compare';
+      compareBtn.title = 'Load compare benchmark JSON';
+    } else {
+      compareFileInput.click();
+    }
+  });
+  compareFileInput.addEventListener('change', e => {
+    if (e.target.files[0]) readCompareFile(e.target.files[0]);
+    compareFileInput.value = '';
+  });
+}
+
+const newViewBtn = document.getElementById('new-view-btn');
+if (newViewBtn) {
+  newViewBtn.addEventListener('click', () => {
+    resetViewer();
+  });
+}
 
 // theme toggle
 (function(){
-  const KEY = 'bench_viewer_theme';
   const btn = document.getElementById('theme-toggle');
   if (!btn) return;
   function applyTheme(theme){
@@ -132,13 +257,12 @@ dz.addEventListener('click', e => { if (e.target.tagName !== 'BUTTON') fileInput
     btn.textContent = isLight ? '🌞 Light' : '🌙 Dark';
     btn.setAttribute('aria-pressed', String(isLight));
   }
-  const saved = localStorage.getItem(KEY) || 'dark';
-  applyTheme(saved);
+  // Always start in light mode.
+  applyTheme('light');
   btn.addEventListener('click', ()=>{
     const cur = document.body.classList.contains('light') ? 'light' : 'dark';
     const next = cur === 'light' ? 'dark' : 'light';
     applyTheme(next);
-    localStorage.setItem(KEY, next);
   });
 })();
 

@@ -53,12 +53,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1386,
-      "real_time": 542.1773690709236,
-      "cpu_time": 541.6385041525621,
+      "real_time": 521.2314507577208,
+      "cpu_time": 520.7134037878864,
       "time_unit": "us",
-      "items_per_second": 1844414866.8794537,
-      "result_size": 1000000,
-      "_random_factor": 1.0921947182904852
+      "items_per_second": 1918533500.8973217,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/5/100000",
@@ -70,12 +69,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1048,
-      "real_time": 680.968505551651,
-      "cpu_time": 680.5414095985901,
+      "real_time": 694.4870995710381,
+      "cpu_time": 694.0515249045717,
       "time_unit": "us",
-      "items_per_second": 1468496695.2912195,
-      "result_size": 1000000,
-      "_random_factor": 1.0295611412665204
+      "items_per_second": 1439911555.7620397,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/10/100000",
@@ -87,12 +85,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 552,
-      "real_time": 1395.2836917616407,
-      "cpu_time": 1394.743158198557,
+      "real_time": 1342.5727399457683,
+      "cpu_time": 1342.0526266303852,
       "time_unit": "us",
-      "items_per_second": 716700127.6546363,
-      "result_size": 1000000,
-      "_random_factor": 1.0912242091321636
+      "items_per_second": 744838599.9855723,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/0/200000",
@@ -104,12 +101,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4489,
-      "real_time": 155.66702086401145,
-      "cpu_time": 155.2464171013626,
+      "real_time": 163.77082571835564,
+      "cpu_time": 163.32832591893168,
       "time_unit": "us",
-      "items_per_second": 6423968252.553547,
-      "result_size": 1000000,
-      "_random_factor": 0.9980432790166502
+      "items_per_second": 6106093656.264193,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/5/200000",
@@ -121,12 +117,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 611,
-      "real_time": 1139.4092381825274,
-      "cpu_time": 1138.9510719909167,
+      "real_time": 1188.4966617836426,
+      "cpu_time": 1188.0187571195206,
       "time_unit": "us",
-      "items_per_second": 877647790.17862,
-      "result_size": 1000000,
-      "_random_factor": 1.0066327811945055
+      "items_per_second": 841399081.8444916,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/10/200000",
@@ -138,12 +133,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 320,
-      "real_time": 2154.206147265726,
-      "cpu_time": 2153.2887597273852,
+      "real_time": 2305.8580879692995,
+      "cpu_time": 2304.8761181249693,
       "time_unit": "us",
-      "items_per_second": 464208126.6313683,
-      "result_size": 1000000,
-      "_random_factor": 0.980943478885561
+      "items_per_second": 433678033.01402223,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/0/300000",
@@ -155,12 +149,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4495,
-      "real_time": 171.8211187477928,
-      "cpu_time": 171.329919381136,
+      "real_time": 164.40652835373632,
+      "cpu_time": 163.93652569521484,
       "time_unit": "us",
-      "items_per_second": 5820006337.334164,
-      "result_size": 1000000,
-      "_random_factor": 1.0973540801068948
+      "items_per_second": 6082483524.306314,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/5/300000",
@@ -172,12 +165,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 464,
-      "real_time": 1505.9559592447233,
-      "cpu_time": 1505.0971196163916,
+      "real_time": 1597.575771659152,
+      "cpu_time": 1596.6646816810282,
       "time_unit": "us",
-      "items_per_second": 664030042.7520646,
-      "result_size": 1000000,
-      "_random_factor": 0.9897832611499602
+      "items_per_second": 625948401.1587485,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/10/300000",
@@ -189,12 +181,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 237,
-      "real_time": 3153.033687828492,
-      "cpu_time": 3152.048038445324,
+      "real_time": 3146.4413860753652,
+      "cpu_time": 3145.4577974688336,
       "time_unit": "us",
-      "items_per_second": 317154873.37171596,
-      "result_size": 1000000,
-      "_random_factor": 1.05219991920759
+      "items_per_second": 317819363.94096476,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/0/400000",
@@ -206,12 +197,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4481,
-      "real_time": 172.29632374842362,
-      "cpu_time": 171.85085188841686,
+      "real_time": 165.47398118713923,
+      "cpu_time": 165.0461484825379,
       "time_unit": "us",
-      "items_per_second": 5803954363.298766,
-      "result_size": 1000000,
-      "_random_factor": 1.0932905501998362
+      "items_per_second": 6043246151.605379,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/5/400000",
@@ -223,12 +213,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 375,
-      "real_time": 1817.324599685176,
-      "cpu_time": 1816.8688849818625,
+      "real_time": 1941.1638623994122,
+      "cpu_time": 1940.677093599942,
       "time_unit": "us",
-      "items_per_second": 550259430.9091699,
-      "result_size": 1000000,
-      "_random_factor": 0.9830137819023581
+      "items_per_second": 515154861.1480595,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/10/400000",
@@ -240,12 +229,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 190,
-      "real_time": 3789.937080679235,
-      "cpu_time": 3789.1477481530455,
+      "real_time": 3844.2634097361192,
+      "cpu_time": 3843.462762631972,
       "time_unit": "us",
-      "items_per_second": 263856623.13443458,
-      "result_size": 1000000,
-      "_random_factor": 1.0351616189033093
+      "items_per_second": 260127856.34495395,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/0/500000",
@@ -257,12 +245,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4435,
-      "real_time": 159.90678256726602,
-      "cpu_time": 159.44571379688023,
+      "real_time": 164.64029617802782,
+      "cpu_time": 164.1655789853232,
       "time_unit": "us",
-      "items_per_second": 6253643428.660335,
-      "result_size": 1000000,
-      "_random_factor": 1.0198118297483774
+      "items_per_second": 6073847188.167629,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/5/500000",
@@ -274,12 +261,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 328,
-      "real_time": 1986.064891087749,
-      "cpu_time": 1985.3130866444683,
+      "real_time": 2232.863693140877,
+      "cpu_time": 2232.018465548729,
       "time_unit": "us",
-      "items_per_second": 503508220.9485661,
-      "result_size": 1000000,
-      "_random_factor": 0.933943322222565
+      "items_per_second": 447855372.03721625,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/10/500000",
@@ -291,12 +277,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 166,
-      "real_time": 4334.995776843635,
-      "cpu_time": 4334.235185937915,
+      "real_time": 4354.218218674155,
+      "cpu_time": 4353.454255120525,
       "time_unit": "us",
-      "items_per_second": 230680732.22625205,
-      "result_size": 1000000,
-      "_random_factor": 1.0453645952250434
+      "items_per_second": 229662352.638012,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/0/600000",
@@ -308,12 +293,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4410,
-      "real_time": 156.17625456354338,
-      "cpu_time": 155.68671906480935,
+      "real_time": 165.59217452365397,
+      "cpu_time": 165.07312476177796,
       "time_unit": "us",
-      "items_per_second": 6403022039.391593,
-      "result_size": 1000000,
-      "_random_factor": 0.9902947875613299
+      "items_per_second": 6038932714.523628,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/5/600000",
@@ -325,12 +309,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 300,
-      "real_time": 2328.908312259725,
-      "cpu_time": 2328.2751587759944,
+      "real_time": 2428.346676000516,
+      "cpu_time": 2427.686488499994,
       "time_unit": "us",
-      "items_per_second": 429385731.8194319,
-      "result_size": 1000000,
-      "_random_factor": 1.0070035518570215
+      "items_per_second": 411802816.2465661,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/10/600000",
@@ -342,12 +325,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 149,
-      "real_time": 4968.774837133624,
-      "cpu_time": 4964.734375168834,
+      "real_time": 4893.329974832081,
+      "cpu_time": 4889.350862416538,
       "time_unit": "us",
-      "items_per_second": 201256855.61893523,
-      "result_size": 1000000,
-      "_random_factor": 1.0661887928719418
+      "items_per_second": 204359813.28529066,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/0/700000",
@@ -359,12 +341,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4497,
-      "real_time": 161.70705166053517,
-      "cpu_time": 161.29267659313507,
+      "real_time": 162.79688809200144,
+      "cpu_time": 162.37972031370774,
       "time_unit": "us",
-      "items_per_second": 6184022216.293066,
-      "result_size": 1000000,
-      "_random_factor": 1.0429708223145342
+      "items_per_second": 6142623558.227168,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/5/700000",
@@ -376,12 +357,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 281,
-      "real_time": 2393.8309508202137,
-      "cpu_time": 2392.9676522785817,
+      "real_time": 2601.4602293588136,
+      "cpu_time": 2600.522052491583,
       "time_unit": "us",
-      "items_per_second": 417740442.2218551,
-      "result_size": 1000000,
-      "_random_factor": 0.9661967805599461
+      "items_per_second": 384399495.6042329,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/10/700000",
@@ -393,12 +373,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 135,
-      "real_time": 5030.32827323512,
-      "cpu_time": 5025.824328574069,
+      "real_time": 5199.576285556777,
+      "cpu_time": 5194.920803333945,
       "time_unit": "us",
-      "items_per_second": 198794183.13924012,
-      "result_size": 1000000,
-      "_random_factor": 1.0158221356552881
+      "items_per_second": 192323363.49747753,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/0/800000",
@@ -410,12 +389,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4490,
-      "real_time": 147.7286950043946,
-      "cpu_time": 147.2333622380222,
+      "real_time": 163.21805211562693,
+      "cpu_time": 162.67078369716603,
       "time_unit": "us",
-      "items_per_second": 6769165597.585846,
-      "result_size": 1000000,
-      "_random_factor": 0.9503552318142339
+      "items_per_second": 6126773276.840604,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/5/800000",
@@ -427,12 +405,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 264,
-      "real_time": 2518.545190441908,
-      "cpu_time": 2517.970132394119,
+      "real_time": 2707.070716477893,
+      "cpu_time": 2706.4526124997105,
       "time_unit": "us",
-      "items_per_second": 397054618.592942,
-      "result_size": 1000000,
-      "_random_factor": 0.976876013569629
+      "items_per_second": 369402983.7909358,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/10/800000",
@@ -444,12 +421,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 136,
-      "real_time": 4734.625637662444,
-      "cpu_time": 4732.822154053973,
+      "real_time": 5473.982409927276,
+      "cpu_time": 5471.8972952202475,
       "time_unit": "us",
-      "items_per_second": 211209940.66464674,
-      "result_size": 1000000,
-      "_random_factor": 0.9081791915388367
+      "items_per_second": 182682355.38836622,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/0/900000",
@@ -461,12 +437,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4493,
-      "real_time": 158.99790921521424,
-      "cpu_time": 158.57741567911285,
+      "real_time": 164.88229854242607,
+      "cpu_time": 164.44624286661977,
       "time_unit": "us",
-      "items_per_second": 6289390879.011079,
-      "result_size": 1000000,
-      "_random_factor": 1.0125271551392
+      "items_per_second": 6064932432.650972,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/5/900000",
@@ -478,12 +453,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 268,
-      "real_time": 2833.7185604212023,
-      "cpu_time": 2833.057980915277,
+      "real_time": 2714.9604934703184,
+      "cpu_time": 2714.3275981339807,
       "time_unit": "us",
-      "items_per_second": 352893196.22883105,
-      "result_size": 1000000,
-      "_random_factor": 1.0959292025052783
+      "items_per_second": 368329484.86914426,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/10/900000",
@@ -495,12 +469,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 127,
-      "real_time": 5480.429418566977,
-      "cpu_time": 5479.227878664593,
+      "real_time": 5620.029375592072,
+      "cpu_time": 5618.797229526206,
       "time_unit": "us",
-      "items_per_second": 182467453.48313966,
-      "result_size": 1000000,
-      "_random_factor": 1.023918293823703
+      "items_per_second": 177935012.99886885,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/0/1000000",
@@ -512,12 +485,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4473,
-      "real_time": 142.314396936635,
-      "cpu_time": 141.93753659574438,
+      "real_time": 165.6440509390529,
+      "cpu_time": 165.20541173706695,
       "time_unit": "us",
-      "items_per_second": 7026695974.021845,
-      "result_size": 1000000,
-      "_random_factor": 0.9021158075785535
+      "items_per_second": 6037041441.155893,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/5/1000000",
@@ -529,12 +501,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 269,
-      "real_time": 2832.082211564703,
-      "cpu_time": 2830.992216562905,
+      "real_time": 2739.503721747853,
+      "cpu_time": 2738.4493578060446,
       "time_unit": "us",
-      "items_per_second": 353097094.3980853,
-      "result_size": 1000000,
-      "_random_factor": 1.0854835854158549
+      "items_per_second": 365029619.0734802,
+      "result_size": 1000000
     },
     {
       "name": "Increment/unbounded/10/1000000",
@@ -546,12 +517,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 126,
-      "real_time": 5116.517190326192,
-      "cpu_time": 5115.14812266807,
+      "real_time": 5629.665949998497,
+      "cpu_time": 5628.1595749993585,
       "time_unit": "us",
-      "items_per_second": 195445449.0821807,
-      "result_size": 1000000,
-      "_random_factor": 0.9542916218401796
+      "items_per_second": 177630432.93896806,
+      "result_size": 1000000
     },
     {
       "name": "Increment/bounded/0/100000",
@@ -563,12 +533,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 3074,
-      "real_time": 214.01487266377669,
-      "cpu_time": 213.54897998158305,
+      "real_time": 238.90960252109613,
+      "cpu_time": 238.38951607039778,
       "time_unit": "us",
-      "items_per_second": 4205324558.980199,
-      "result_size": 900002,
-      "_random_factor": 0.9405884649493013
+      "items_per_second": 3767123591.9474115,
+      "result_size": 900002
     },
     {
       "name": "Increment/bounded/5/100000",
@@ -580,12 +549,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 970,
-      "real_time": 782.1379841478683,
-      "cpu_time": 781.2725852748346,
+      "real_time": 762.3799385566307,
+      "cpu_time": 761.536401031255,
       "time_unit": "us",
-      "items_per_second": 1150694657.7726223,
-      "result_size": 900002,
-      "_random_factor": 1.0772120852367608
+      "items_per_second": 1180516373.1143308,
+      "result_size": 900002
     },
     {
       "name": "Increment/bounded/10/100000",
@@ -597,12 +565,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 523,
-      "real_time": 1337.6306595455396,
-      "cpu_time": 1336.0593372356636,
+      "real_time": 1397.4596196938205,
+      "cpu_time": 1395.818015965687,
       "time_unit": "us",
-      "items_per_second": 672832962.9538964,
-      "result_size": 900002,
-      "_random_factor": 1.0050467095647038
+      "items_per_second": 644027195.7176036,
+      "result_size": 900002
     },
     {
       "name": "Increment/bounded/0/200000",
@@ -614,12 +581,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 2315,
-      "real_time": 288.74786965034747,
-      "cpu_time": 288.10175461537995,
+      "real_time": 320.1608692875776,
+      "cpu_time": 319.4444631319046,
       "time_unit": "us",
-      "items_per_second": 2770590137.9246325,
-      "result_size": 800002,
-      "_random_factor": 0.9469778858594214
+      "items_per_second": 2498750087.042697,
+      "result_size": 800002
     },
     {
       "name": "Increment/bounded/5/200000",
@@ -631,12 +597,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 559,
-      "real_time": 1316.6179528019907,
-      "cpu_time": 1315.0947496777835,
+      "real_time": 1330.440760196914,
+      "cpu_time": 1328.9015653847882,
       "time_unit": "us",
-      "items_per_second": 607618936.3037754,
-      "result_size": 800002,
-      "_random_factor": 1.0390908725898316
+      "items_per_second": 601305991.1676146,
+      "result_size": 800002
     },
     {
       "name": "Increment/bounded/10/200000",
@@ -648,12 +613,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 308,
-      "real_time": 2367.4205252062247,
-      "cpu_time": 2366.3336958252316,
+      "real_time": 2437.3189704542337,
+      "cpu_time": 2436.200052273143,
       "time_unit": "us",
-      "items_per_second": 337921375.38822436,
-      "result_size": 800002,
-      "_random_factor": 1.0198876641095804
+      "items_per_second": 328230325.9022789,
+      "result_size": 800002
     },
     {
       "name": "Increment/bounded/0/300000",
@@ -665,12 +629,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1872,
-      "real_time": 392.1692399840095,
-      "cpu_time": 391.6539918187267,
+      "real_time": 390.1589562499038,
+      "cpu_time": 389.64634927852427,
       "time_unit": "us",
-      "items_per_second": 1784948763.5199084,
-      "result_size": 700002,
-      "_random_factor": 1.0554100973128988
+      "items_per_second": 1794145664.957224,
+      "result_size": 700002
     },
     {
       "name": "Increment/bounded/5/300000",
@@ -682,12 +645,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 405,
-      "real_time": 1822.6613191714002,
-      "cpu_time": 1820.591307548392,
+      "real_time": 1815.8538922225341,
+      "cpu_time": 1813.7916118509431,
       "time_unit": "us",
-      "items_per_second": 384054894.1468884,
-      "result_size": 700002,
-      "_random_factor": 1.0539363289782973
+      "items_per_second": 385494671.67935246,
+      "result_size": 700002
     },
     {
       "name": "Increment/bounded/10/300000",
@@ -699,12 +661,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 223,
-      "real_time": 2983.758495350064,
-      "cpu_time": 2981.112190232941,
+      "real_time": 3298.633051345005,
+      "cpu_time": 3295.7074829597314,
       "time_unit": "us",
-      "items_per_second": 234604107.9031343,
-      "result_size": 700002,
-      "_random_factor": 0.9497711237811435
+      "items_per_second": 212209721.14936426,
+      "result_size": 700002
     },
     {
       "name": "Increment/bounded/0/400000",
@@ -716,12 +677,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1571,
-      "real_time": 421.2471310921968,
-      "cpu_time": 420.8351396677176,
+      "real_time": 465.33832963097996,
+      "cpu_time": 464.88321578654296,
       "time_unit": "us",
-      "items_per_second": 1424346792.4501538,
-      "result_size": 600002,
-      "_random_factor": 0.9505116159194634
+      "items_per_second": 1289388734.591905,
+      "result_size": 600002
     },
     {
       "name": "Increment/bounded/5/400000",
@@ -733,12 +693,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 326,
-      "real_time": 2236.9312451347273,
-      "cpu_time": 2235.0678304431403,
+      "real_time": 2233.1386407955256,
+      "cpu_time": 2231.278385429761,
       "time_unit": "us",
-      "items_per_second": 268225499.2436581,
-      "result_size": 600002,
-      "_random_factor": 1.0517832455555662
+      "items_per_second": 268681034.4145303,
+      "result_size": 600002
     },
     {
       "name": "Increment/bounded/10/400000",
@@ -750,12 +709,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 179,
-      "real_time": 3548.1461235821953,
-      "cpu_time": 3547.3574066458705,
+      "real_time": 4099.8671899437,
+      "cpu_time": 4098.955831003915,
       "time_unit": "us",
-      "items_per_second": 169102956.61505628,
-      "result_size": 600002,
-      "_random_factor": 0.9087010035104247
+      "items_per_second": 146346691.7835061,
+      "result_size": 600002
     },
     {
       "name": "Increment/bounded/0/500000",
@@ -767,12 +725,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1381,
-      "real_time": 551.8819806217163,
-      "cpu_time": 551.4486795726851,
+      "real_time": 538.9800231358024,
+      "cpu_time": 538.5568518462298,
       "time_unit": "us",
-      "items_per_second": 905994429.1653236,
-      "result_size": 500002,
-      "_random_factor": 1.075134614974025
+      "items_per_second": 927681877.875497,
+      "result_size": 500002
     },
     {
       "name": "Increment/bounded/5/500000",
@@ -784,12 +741,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 281,
-      "real_time": 2679.3068406856123,
-      "cpu_time": 2676.611940934704,
+      "real_time": 2591.726748042425,
+      "cpu_time": 2589.119938078869,
       "time_unit": "us",
-      "items_per_second": 186616177.14231405,
-      "result_size": 500002,
-      "_random_factor": 1.085481787323762
+      "items_per_second": 192922344.29330176,
+      "result_size": 500002
     },
     {
       "name": "Increment/bounded/10/500000",
@@ -801,12 +757,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 154,
-      "real_time": 4389.162005328064,
-      "cpu_time": 4388.220218647626,
+      "real_time": 4751.956397728465,
+      "cpu_time": 4750.936765909004,
       "time_unit": "us",
-      "items_per_second": 113917417.35507615,
-      "result_size": 500002,
-      "_random_factor": 0.969836362092355
+      "items_per_second": 105220241.54914626,
+      "result_size": 500002
     },
     {
       "name": "Increment/bounded/0/600000",
@@ -818,12 +773,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1193,
-      "real_time": 605.7568807485128,
-      "cpu_time": 605.2459936599868,
+      "real_time": 605.5836018862016,
+      "cpu_time": 605.0728609387039,
       "time_unit": "us",
-      "items_per_second": 660334224.3603265,
-      "result_size": 400002,
-      "_random_factor": 1.0503004420939737
+      "items_per_second": 660523169.3099355,
+      "result_size": 400002
     },
     {
       "name": "Increment/bounded/5/600000",
@@ -835,12 +789,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 255,
-      "real_time": 2942.2933478124264,
-      "cpu_time": 2941.3531246235143,
+      "real_time": 2883.987144706553,
+      "cpu_time": 2883.065553529387,
       "time_unit": "us",
-      "items_per_second": 135949054.94294053,
-      "result_size": 400002,
-      "_random_factor": 1.0712280811908392
+      "items_per_second": 138697566.920223,
+      "result_size": 400002
     },
     {
       "name": "Increment/bounded/10/600000",
@@ -852,12 +805,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 137,
-      "real_time": 4648.376469079585,
-      "cpu_time": 4644.775904910564,
+      "real_time": 5314.187013503623,
+      "cpu_time": 5310.070722261817,
       "time_unit": "us",
-      "items_per_second": 86051980.22594833,
-      "result_size": 400002,
-      "_random_factor": 0.9184462797660699
+      "items_per_second": 75270591.52859586,
+      "result_size": 400002
     },
     {
       "name": "Increment/bounded/0/700000",
@@ -869,12 +821,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1073,
-      "real_time": 687.450684314954,
-      "cpu_time": 686.9755849154811,
+      "real_time": 683.4798907259079,
+      "cpu_time": 683.0075355547741,
       "time_unit": "us",
-      "items_per_second": 436397849.1038272,
-      "result_size": 300002,
-      "_random_factor": 1.0561001549936901
+      "items_per_second": 438933177.21663314,
+      "result_size": 300002
     },
     {
       "name": "Increment/bounded/5/700000",
@@ -886,12 +837,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 233,
-      "real_time": 3180.5784944509655,
-      "cpu_time": 3177.81807708377,
+      "real_time": 3120.7170366961054,
+      "cpu_time": 3118.0085729618418,
       "time_unit": "us",
-      "items_per_second": 94323092.6460083,
-      "result_size": 300002,
-      "_random_factor": 1.0701410540922183
+      "items_per_second": 96132394.08517836,
+      "result_size": 300002
     },
     {
       "name": "Increment/bounded/10/700000",
@@ -903,12 +853,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 123,
-      "real_time": 5148.86046021399,
-      "cpu_time": 5147.772205556183,
+      "real_time": 5791.683765853341,
+      "cpu_time": 5790.459645121495,
       "time_unit": "us",
-      "items_per_second": 58265707.97910723,
-      "result_size": 300002,
-      "_random_factor": 0.9334597159981731
+      "items_per_second": 51798753.54534278,
+      "result_size": 300002
     },
     {
       "name": "Increment/bounded/0/800000",
@@ -920,12 +869,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 975,
-      "real_time": 771.8407482768175,
-      "cpu_time": 771.3441891476981,
+      "real_time": 756.5934104606833,
+      "cpu_time": 756.1066606151555,
       "time_unit": "us",
-      "items_per_second": 259123401.35775018,
-      "result_size": 200002,
-      "_random_factor": 1.0711602486693517
+      "items_per_second": 264345416.22325322,
+      "result_size": 200002
     },
     {
       "name": "Increment/bounded/5/800000",
@@ -937,12 +885,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 225,
-      "real_time": 3229.578350680501,
-      "cpu_time": 3228.7053895625745,
+      "real_time": 3276.5365266673143,
+      "cpu_time": 3275.6508726658735,
       "time_unit": "us",
-      "items_per_second": 61928208.045442775,
-      "result_size": 200002,
-      "_random_factor": 1.0349517670916049
+      "items_per_second": 61040674.61852147,
+      "result_size": 200002
     },
     {
       "name": "Increment/bounded/10/800000",
@@ -954,12 +901,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 119,
-      "real_time": 5531.845686936648,
-      "cpu_time": 5530.505536317101,
+      "real_time": 6098.429373529638,
+      "cpu_time": 6096.951961764068,
       "time_unit": "us",
-      "items_per_second": 36154660.00295363,
-      "result_size": 200002,
-      "_random_factor": 0.9524481822311707
+      "items_per_second": 32795657.33238019,
+      "result_size": 200002
     },
     {
       "name": "Increment/bounded/0/900000",
@@ -971,12 +917,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 882,
-      "real_time": 860.1148506152413,
-      "cpu_time": 859.5278318528107,
+      "real_time": 827.997177381013,
+      "cpu_time": 827.4320785712267,
       "time_unit": "us",
-      "items_per_second": 116265868.3645195,
-      "result_size": 100002,
-      "_random_factor": 1.090729072292986
+      "items_per_second": 120775774.03863886,
+      "result_size": 100002
     },
     {
       "name": "Increment/bounded/5/900000",
@@ -988,12 +933,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 217,
-      "real_time": 3332.732526984058,
-      "cpu_time": 3331.6654768277726,
+      "real_time": 3380.3122016123666,
+      "cpu_time": 3379.229917740553,
       "time_unit": "us",
-      "items_per_second": 30006008.340098143,
-      "result_size": 100002,
-      "_random_factor": 1.0352206969711573
+      "items_per_second": 29583657.968722623,
+      "result_size": 100002
     },
     {
       "name": "Increment/bounded/10/900000",
@@ -1005,12 +949,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 116,
-      "real_time": 6429.390053483598,
-      "cpu_time": 6423.719704688096,
+      "real_time": 6253.203029741883,
+      "cpu_time": 6247.688067673511,
       "time_unit": "us",
-      "items_per_second": 15553886.009111628,
-      "result_size": 100002,
-      "_random_factor": 1.0795842585070259
+      "items_per_second": 15992124.28004722,
+      "result_size": 100002
     },
     {
       "name": "Increment/bounded/0/1000000",
@@ -1022,12 +965,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 812,
-      "real_time": 832.5508102544745,
-      "cpu_time": 831.9992407039591,
+      "real_time": 901.1166918113854,
+      "cpu_time": 900.5196969823102,
       "time_unit": "us",
-      "items_per_second": 2402.255784711431,
-      "result_size": 2,
-      "_random_factor": 0.9701056019836489
+      "items_per_second": 2219.4683753773193,
+      "result_size": 2
     },
     {
       "name": "Increment/bounded/5/1000000",
@@ -1039,12 +981,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 215,
-      "real_time": 3441.762608019285,
-      "cpu_time": 3440.99164627861,
+      "real_time": 3475.804583025566,
+      "cpu_time": 3475.025995814079,
       "time_unit": "us",
-      "items_per_second": 581.0976025307535,
-      "result_size": 2,
-      "_random_factor": 1.0397163166389864
+      "items_per_second": 575.4063418200197,
+      "result_size": 2
     },
     {
       "name": "Increment/bounded/10/1000000",
@@ -1056,12 +997,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 115,
-      "real_time": 5678.709082085574,
-      "cpu_time": 5674.00507262081,
+      "real_time": 6352.8997121738685,
+      "cpu_time": 6347.637230869969,
       "time_unit": "us",
-      "items_per_second": 352.19272040353866,
-      "result_size": 2,
-      "_random_factor": 0.9385705435840295
+      "items_per_second": 314.81686955760705,
+      "result_size": 2
     },
     {
       "name": "Filter/LessThan/0/0",
@@ -1073,12 +1013,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4499,
-      "real_time": 158.8089483573545,
-      "cpu_time": 158.39815873703054,
+      "real_time": 164.6322114692752,
+      "cpu_time": 164.20635886876317,
       "time_unit": "us",
-      "items_per_second": 6296874391.169594,
-      "result_size": 1000000,
-      "_random_factor": 1.0128600854416765
+      "items_per_second": 6074145460.814798,
+      "result_size": 1000000
     },
     {
       "name": "Filter/LessThan/5/0",
@@ -1090,12 +1029,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4439,
-      "real_time": 165.89001556228112,
-      "cpu_time": 165.4285126398505,
+      "real_time": 165.95118767756512,
+      "cpu_time": 165.48951457545326,
       "time_unit": "us",
-      "items_per_second": 6028090338.110577,
-      "result_size": 1000000,
-      "_random_factor": 1.0496129541346038
+      "items_per_second": 6025868292.928101,
+      "result_size": 1000000
     },
     {
       "name": "Filter/LessThan/10/0",
@@ -1107,12 +1045,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4377,
-      "real_time": 151.62344944892118,
-      "cpu_time": 151.39014053635063,
+      "real_time": 167.1812588412448,
+      "cpu_time": 166.92401052085515,
       "time_unit": "us",
-      "items_per_second": 6595285911.476901,
-      "result_size": 1000000,
-      "_random_factor": 0.952287493375964
+      "items_per_second": 5981531703.560142,
+      "result_size": 1000000
     },
     {
       "name": "Filter/LessThan/0/10",
@@ -1124,12 +1061,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4453,
-      "real_time": 169.29221117379842,
-      "cpu_time": 168.799379722806,
+      "real_time": 165.03788680695703,
+      "cpu_time": 164.55744024264172,
       "time_unit": "us",
-      "items_per_second": 5316251667.810304,
-      "result_size": 900000,
-      "_random_factor": 1.0770667582553848
+      "items_per_second": 5453293285.636406,
+      "result_size": 900000
     },
     {
       "name": "Filter/LessThan/5/10",
@@ -1141,12 +1077,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4427,
-      "real_time": 160.3139877822933,
-      "cpu_time": 159.84966855821594,
+      "real_time": 166.5151363449575,
+      "cpu_time": 166.03285666384932,
       "time_unit": "us",
-      "items_per_second": 5613982987.075349,
-      "result_size": 900000,
-      "_random_factor": 1.0108972125074047
+      "items_per_second": 5404914050.189013,
+      "result_size": 900000
     },
     {
       "name": "Filter/LessThan/10/10",
@@ -1158,12 +1093,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4483,
-      "real_time": 152.59914405721412,
-      "cpu_time": 152.07849550980657,
+      "real_time": 166.09394598490007,
+      "cpu_time": 165.5272549182857,
       "time_unit": "us",
-      "items_per_second": 5897805033.969013,
-      "result_size": 900000,
-      "_random_factor": 0.9646895936510627
+      "items_per_second": 5418620134.907391,
+      "result_size": 900000
     },
     {
       "name": "Filter/LessThan/0/20",
@@ -1175,12 +1109,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4551,
-      "real_time": 148.13799535577024,
-      "cpu_time": 147.7039912278622,
+      "real_time": 161.821824455853,
+      "cpu_time": 161.34773042190324,
       "time_unit": "us",
-      "items_per_second": 5400370094.645261,
-      "result_size": 800000,
-      "_random_factor": 0.9612108604423337
+      "items_per_second": 4943708938.458113,
+      "result_size": 800000
     },
     {
       "name": "Filter/LessThan/5/20",
@@ -1192,12 +1125,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4442,
-      "real_time": 157.61291202696106,
-      "cpu_time": 157.14779351064425,
+      "real_time": 165.85950408596807,
+      "cpu_time": 165.37004972930782,
       "time_unit": "us",
-      "items_per_second": 5075726282.267744,
-      "result_size": 800000,
-      "_random_factor": 0.9977936358867365
+      "items_per_second": 4823359411.380762,
+      "result_size": 800000
     },
     {
       "name": "Filter/LessThan/10/20",
@@ -1209,12 +1141,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4458,
-      "real_time": 156.94426024889557,
-      "cpu_time": 156.4607374491091,
+      "real_time": 165.33269051135812,
+      "cpu_time": 164.82332415870843,
       "time_unit": "us",
-      "items_per_second": 5097351115.174851,
-      "result_size": 800000,
-      "_random_factor": 0.9967264958409385
+      "items_per_second": 4838728490.5706005,
+      "result_size": 800000
     },
     {
       "name": "Filter/LessThan/0/30",
@@ -1226,12 +1157,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4517,
-      "real_time": 164.21908092063487,
-      "cpu_time": 163.7253654111946,
+      "real_time": 162.88756301730294,
+      "cpu_time": 162.39785064218958,
       "time_unit": "us",
-      "items_per_second": 4262598451.2621994,
-      "result_size": 700000,
-      "_random_factor": 1.0585831832252903
+      "items_per_second": 4297442892.712697,
+      "result_size": 700000
     },
     {
       "name": "Filter/LessThan/5/30",
@@ -1243,12 +1173,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4447,
-      "real_time": 158.7444080917161,
-      "cpu_time": 158.13462515993214,
+      "real_time": 165.72349209535503,
+      "cpu_time": 165.08690049449058,
       "time_unit": "us",
-      "items_per_second": 4409604145.524095,
-      "result_size": 700000,
-      "_random_factor": 1.005781536394343
+      "items_per_second": 4223903268.9296074,
+      "result_size": 700000
     },
     {
       "name": "Filter/LessThan/10/30",
@@ -1260,12 +1189,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4470,
-      "real_time": 159.57810089932894,
-      "cpu_time": 159.0402598015565,
+      "real_time": 164.71479828895696,
+      "cpu_time": 164.15964449635112,
       "time_unit": "us",
-      "items_per_second": 4386566803.684425,
-      "result_size": 700000,
-      "_random_factor": 1.0172553266911233
+      "items_per_second": 4249769949.4613676,
+      "result_size": 700000
     },
     {
       "name": "Filter/LessThan/0/40",
@@ -1277,12 +1205,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4556,
-      "real_time": 149.7925001590485,
-      "cpu_time": 149.34792624887476,
+      "real_time": 161.8531206977728,
+      "cpu_time": 161.37275168953786,
       "time_unit": "us",
-      "items_per_second": 4005540994.1280417,
-      "result_size": 600000,
-      "_random_factor": 0.9717583725845654
+      "items_per_second": 3707064759.7853603,
+      "result_size": 600000
     },
     {
       "name": "Filter/LessThan/5/40",
@@ -1294,12 +1221,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4433,
-      "real_time": 157.49876579124887,
-      "cpu_time": 156.87563115738794,
+      "real_time": 165.63682921221132,
+      "cpu_time": 164.98149680750006,
       "time_unit": "us",
-      "items_per_second": 3809553662.123605,
-      "result_size": 600000,
-      "_random_factor": 0.9984114334194185
+      "items_per_second": 3622382792.8466883,
+      "result_size": 600000
     },
     {
       "name": "Filter/LessThan/10/40",
@@ -1311,12 +1237,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4489,
-      "real_time": 145.52944025332903,
-      "cpu_time": 145.12960445723107,
+      "real_time": 165.26408828291414,
+      "cpu_time": 164.81003240123155,
       "time_unit": "us",
-      "items_per_second": 4122877123.388612,
-      "result_size": 600000,
-      "_random_factor": 0.9246165567706904
+      "items_per_second": 3630552809.348788,
+      "result_size": 600000
     },
     {
       "name": "Filter/LessThan/0/50",
@@ -1328,12 +1253,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4443,
-      "real_time": 141.77548817738287,
-      "cpu_time": 141.3714649488952,
+      "real_time": 164.79827397015666,
+      "cpu_time": 164.32864179639674,
       "time_unit": "us",
-      "items_per_second": 3526702721.5199804,
-      "result_size": 500000,
-      "_random_factor": 0.9033120250592545
+      "items_per_second": 3034012359.198283,
+      "result_size": 500000
     },
     {
       "name": "Filter/LessThan/5/50",
@@ -1345,12 +1269,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4368,
-      "real_time": 151.59888708178633,
-      "cpu_time": 151.1125238375422,
+      "real_time": 168.57620480800452,
+      "cpu_time": 168.0353745192666,
       "time_unit": "us",
-      "items_per_second": 3298177246.711938,
-      "result_size": 500000,
-      "_random_factor": 0.944254449298869
+      "items_per_second": 2966017656.9371815,
+      "result_size": 500000
     },
     {
       "name": "Filter/LessThan/10/50",
@@ -1362,12 +1285,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4419,
-      "real_time": 155.78985129495274,
-      "cpu_time": 155.30337099183322,
+      "real_time": 165.85818913764894,
+      "cpu_time": 165.34026873746976,
       "time_unit": "us",
-      "items_per_second": 3209451680.22122,
-      "result_size": 500000,
-      "_random_factor": 0.9862602787972242
+      "items_per_second": 3014623532.3059044,
+      "result_size": 500000
     },
     {
       "name": "Filter/LessThan/0/60",
@@ -1379,12 +1301,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4395,
-      "real_time": 163.73119164064454,
-      "cpu_time": 163.28719608209474,
+      "real_time": 165.07883143332046,
+      "cpu_time": 164.631181433143,
       "time_unit": "us",
-      "items_per_second": 2443028698.3919086,
-      "result_size": 400000,
-      "_random_factor": 1.0414282057243587
+      "items_per_second": 2423084756.0946674,
+      "result_size": 400000
     },
     {
       "name": "Filter/LessThan/5/60",
@@ -1396,12 +1317,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4451,
-      "real_time": 171.01765713160574,
-      "cpu_time": 170.5670919963593,
+      "real_time": 173.27673501426318,
+      "cpu_time": 172.82021808579955,
       "time_unit": "us",
-      "items_per_second": 2338939772.120619,
-      "result_size": 400000,
-      "_random_factor": 1.036310731347777
+      "items_per_second": 2308446081.7378297,
+      "result_size": 400000
     },
     {
       "name": "Filter/LessThan/10/60",
@@ -1413,12 +1333,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4067,
-      "real_time": 197.79851478895839,
-      "cpu_time": 197.02414325327305,
+      "real_time": 197.8778424264496,
+      "cpu_time": 197.10316032693353,
       "time_unit": "us",
-      "items_per_second": 2022259876.050035,
-      "result_size": 400000,
-      "_random_factor": 1.0495790634345696
+      "items_per_second": 2021449168.3103852,
+      "result_size": 400000
     },
     {
       "name": "Filter/LessThan/0/70",
@@ -1430,12 +1349,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 3851,
-      "real_time": 151.98816413376176,
-      "cpu_time": 151.57713871663145,
+      "real_time": 176.0898860033947,
+      "cpu_time": 175.61368169327963,
       "time_unit": "us",
-      "items_per_second": 1973837908.430659,
-      "result_size": 300000,
-      "_random_factor": 0.9062847160760459
+      "items_per_second": 1703675360.4021106,
+      "result_size": 300000
     },
     {
       "name": "Filter/LessThan/5/70",
@@ -1447,12 +1365,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4278,
-      "real_time": 162.98741392813372,
-      "cpu_time": 162.58172115742465,
+      "real_time": 175.19348618527596,
+      "cpu_time": 174.75741122029723,
       "time_unit": "us",
-      "items_per_second": 1840632922.3204896,
-      "result_size": 300000,
-      "_random_factor": 0.9768444498190682
+      "items_per_second": 1712392432.6885924,
+      "result_size": 300000
     },
     {
       "name": "Filter/LessThan/10/70",
@@ -1464,12 +1381,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4331,
-      "real_time": 156.120316431727,
-      "cpu_time": 155.736153534421,
+      "real_time": 171.46115565731924,
+      "cpu_time": 171.0392437893558,
       "time_unit": "us",
-      "items_per_second": 1921594875.3933835,
-      "result_size": 300000,
-      "_random_factor": 0.9560552162667975
+      "items_per_second": 1749667432.5441816,
+      "result_size": 300000
     },
     {
       "name": "Filter/LessThan/0/80",
@@ -1481,12 +1397,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4413,
-      "real_time": 159.3535362125781,
-      "cpu_time": 158.96125222093838,
+      "real_time": 169.52236937436655,
+      "cpu_time": 169.1050525497076,
       "time_unit": "us",
-      "items_per_second": 1255064711.7940373,
-      "result_size": 199999,
-      "_random_factor": 0.9870155404311358
+      "items_per_second": 1179779404.559466,
+      "result_size": 199999
     },
     {
       "name": "Filter/LessThan/5/80",
@@ -1498,12 +1413,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4270,
-      "real_time": 162.57080054870985,
-      "cpu_time": 162.16876909530512,
+      "real_time": 172.76280713044017,
+      "cpu_time": 172.33557122946345,
       "time_unit": "us",
-      "items_per_second": 1230227072.296884,
-      "result_size": 199999,
-      "_random_factor": 0.9880560718561557
+      "items_per_second": 1157650789.0902457,
+      "result_size": 199999
     },
     {
       "name": "Filter/LessThan/10/80",
@@ -1515,12 +1429,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4320,
-      "real_time": 151.17351327068664,
-      "cpu_time": 150.84458373147868,
+      "real_time": 173.6346589924192,
+      "cpu_time": 173.2568575698205,
       "time_unit": "us",
-      "items_per_second": 1322976463.753197,
-      "result_size": 199999,
-      "_random_factor": 0.9141734136221683
+      "items_per_second": 1151838009.5343285,
+      "result_size": 199999
     },
     {
       "name": "Filter/LessThan/0/90",
@@ -1532,12 +1445,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4308,
-      "real_time": 151.26557164421854,
-      "cpu_time": 150.96760701203635,
+      "real_time": 171.16319348897068,
+      "cpu_time": 170.82603429645445,
       "time_unit": "us",
-      "items_per_second": 661082352.798698,
-      "result_size": 99999,
-      "_random_factor": 0.9279381097587666
+      "items_per_second": 584231913.1913351,
+      "result_size": 99999
     },
     {
       "name": "Filter/LessThan/5/90",
@@ -1549,12 +1461,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4342,
-      "real_time": 148.65435017256274,
-      "cpu_time": 148.22066302420487,
+      "real_time": 168.61886255168014,
+      "cpu_time": 168.12693053909862,
       "time_unit": "us",
-      "items_per_second": 672694743.7725029,
-      "result_size": 99999,
-      "_random_factor": 0.9256797568145831
+      "items_per_second": 593047530.3102654,
+      "result_size": 99999
     },
     {
       "name": "Filter/LessThan/10/90",
@@ -1566,12 +1477,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4177,
-      "real_time": 158.86857908479888,
-      "cpu_time": 158.44932532508088,
+      "real_time": 176.24593103954481,
+      "cpu_time": 175.7808184940119,
       "time_unit": "us",
-      "items_per_second": 629444793.7790378,
-      "result_size": 99999,
-      "_random_factor": 0.9464729600004821
+      "items_per_second": 567383311.5475609,
+      "result_size": 99999
     },
     {
       "name": "Filter/LessThan/0/100",
@@ -1583,12 +1493,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4310,
-      "real_time": 171.55851359248652,
-      "cpu_time": 171.18308467579226,
+      "real_time": 169.09706095150253,
+      "cpu_time": 168.72701853810182,
       "time_unit": "us",
       "items_per_second": 0,
-      "result_size": 0,
-      "_random_factor": 1.0652842708116284
+      "result_size": 0
     },
     {
       "name": "Filter/LessThan/5/100",
@@ -1600,12 +1509,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4338,
-      "real_time": 159.7862267374642,
-      "cpu_time": 159.36753917321846,
+      "real_time": 174.91948596086897,
+      "cpu_time": 174.4611447445362,
       "time_unit": "us",
       "items_per_second": 0,
-      "result_size": 0,
-      "_random_factor": 0.9591586503511123
+      "result_size": 0
     },
     {
       "name": "Filter/LessThan/10/100",
@@ -1617,12 +1525,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4355,
-      "real_time": 150.3853256651203,
-      "cpu_time": 149.96827000311595,
+      "real_time": 168.98314116085504,
+      "cpu_time": 168.51450916173732,
       "time_unit": "us",
       "items_per_second": 0,
-      "result_size": 0,
-      "_random_factor": 0.9344399143229734
+      "result_size": 0
     },
     {
       "name": "Filter/GreaterThan/0/0",
@@ -1634,12 +1541,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4440,
-      "real_time": 144.72990749979004,
-      "cpu_time": 144.32985314701497,
+      "real_time": 165.00179807446722,
+      "cpu_time": 164.5457092903609,
       "time_unit": "us",
-      "items_per_second": 6909415042.647289,
-      "result_size": 999999,
-      "_random_factor": 0.920998465763357
+      "items_per_second": 6060533955.809917,
+      "result_size": 999999
     },
     {
       "name": "Filter/GreaterThan/5/0",
@@ -1651,12 +1557,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4422,
-      "real_time": 162.34524204629855,
-      "cpu_time": 161.83253738505465,
+      "real_time": 165.74166085536143,
+      "cpu_time": 165.21822991884764,
       "time_unit": "us",
-      "items_per_second": 6159706237.124058,
-      "result_size": 999999,
-      "_random_factor": 1.0284831421918224
+      "items_per_second": 6033480024.510398,
+      "result_size": 999999
     },
     {
       "name": "Filter/GreaterThan/10/0",
@@ -1668,12 +1573,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4398,
-      "real_time": 167.02044874939892,
-      "cpu_time": 166.57165882814556,
+      "real_time": 167.13172138383044,
+      "cpu_time": 166.68263246902737,
       "time_unit": "us",
-      "items_per_second": 5987284835.406113,
-      "result_size": 999999,
-      "_random_factor": 1.0493009330294352
+      "items_per_second": 5983298632.480593,
+      "result_size": 999999
     },
     {
       "name": "Filter/GreaterThan/0/10",
@@ -1685,12 +1589,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4499,
-      "real_time": 167.30150429374982,
-      "cpu_time": 166.8434166298084,
+      "real_time": 163.58310720075528,
+      "cpu_time": 163.1352008668929,
       "time_unit": "us",
-      "items_per_second": 5379503333.214338,
-      "result_size": 899999,
-      "_random_factor": 1.0738674824953212
+      "items_per_second": 5501784477.632447,
+      "result_size": 899999
     },
     {
       "name": "Filter/GreaterThan/5/10",
@@ -1702,12 +1605,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4414,
-      "real_time": 168.63420086632743,
-      "cpu_time": 168.1178464477282,
+      "real_time": 167.32223285018677,
+      "cpu_time": 166.80989565038846,
       "time_unit": "us",
-      "items_per_second": 5336989740.968436,
-      "result_size": 899999,
-      "_random_factor": 1.0582330147851966
+      "items_per_second": 5378836898.535899,
+      "result_size": 899999
     },
     {
       "name": "Filter/GreaterThan/10/10",
@@ -1719,12 +1621,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4333,
-      "real_time": 174.07711604291922,
-      "cpu_time": 173.48906221894364,
+      "real_time": 169.36504289223964,
+      "cpu_time": 168.79290702863761,
       "time_unit": "us",
-      "items_per_second": 5170116672.763022,
-      "result_size": 899999,
-      "_random_factor": 1.0792130933498572
+      "items_per_second": 5313959626.087859,
+      "result_size": 899999
     },
     {
       "name": "Filter/GreaterThan/0/20",
@@ -1736,12 +1637,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4488,
-      "real_time": 166.71731203625347,
-      "cpu_time": 166.25799260317,
+      "real_time": 163.41377102335363,
+      "cpu_time": 162.96355310808303,
       "time_unit": "us",
-      "items_per_second": 4798535858.267896,
-      "result_size": 799999,
-      "_random_factor": 1.0712265957870168
+      "items_per_second": 4895542125.918331,
+      "result_size": 799999
     },
     {
       "name": "Filter/GreaterThan/5/20",
@@ -1753,12 +1653,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4335,
-      "real_time": 154.0200506721737,
-      "cpu_time": 153.61837362001435,
+      "real_time": 169.86185394487632,
+      "cpu_time": 169.41886221445463,
       "time_unit": "us",
-      "items_per_second": 5194122430.869536,
-      "result_size": 799999,
-      "_random_factor": 0.9520739910107436
+      "items_per_second": 4709703688.148937,
+      "result_size": 799999
     },
     {
       "name": "Filter/GreaterThan/10/20",
@@ -1770,12 +1669,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4341,
-      "real_time": 168.96444429347977,
-      "cpu_time": 168.5136637527468,
+      "real_time": 170.17982128540987,
+      "cpu_time": 169.7257982382436,
       "time_unit": "us",
-      "items_per_second": 4734718025.115723,
-      "result_size": 799999,
-      "_random_factor": 1.0425011917870899
+      "items_per_second": 4700903984.722816,
+      "result_size": 799999
     },
     {
       "name": "Filter/GreaterThan/0/30",
@@ -1787,12 +1685,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4466,
-      "real_time": 155.2347953634145,
-      "cpu_time": 154.78659015715405,
+      "real_time": 163.91779443752435,
+      "cpu_time": 163.4445190439914,
       "time_unit": "us",
-      "items_per_second": 4509291865.662322,
-      "result_size": 699999,
-      "_random_factor": 0.9943797480371159
+      "items_per_second": 4270427151.622015,
+      "result_size": 699999
     },
     {
       "name": "Filter/GreaterThan/5/30",
@@ -1804,12 +1701,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4319,
-      "real_time": 177.73132019645024,
-      "cpu_time": 177.28915588840655,
+      "real_time": 170.06814554215003,
+      "cpu_time": 169.6450458666916,
       "time_unit": "us",
-      "items_per_second": 3938523605.3289657,
-      "result_size": 699999,
-      "_random_factor": 1.0973124073962517
+      "items_per_second": 4115991256.1433253,
+      "result_size": 699999
     },
     {
       "name": "Filter/GreaterThan/10/30",
@@ -1821,12 +1717,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4360,
-      "real_time": 171.33935975688516,
-      "cpu_time": 170.90216097712715,
+      "real_time": 170.81773087075754,
+      "cpu_time": 170.38186310748534,
       "time_unit": "us",
-      "items_per_second": 4085453575.834732,
-      "result_size": 699999,
-      "_random_factor": 1.0532064020967964
+      "items_per_second": 4097929391.9413233,
+      "result_size": 699999
     },
     {
       "name": "Filter/GreaterThan/0/40",
@@ -1838,12 +1733,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4491,
-      "real_time": 159.7410368370929,
-      "cpu_time": 159.28264934757885,
+      "real_time": 164.16732254415484,
+      "cpu_time": 163.69623353452232,
       "time_unit": "us",
-      "items_per_second": 3756073028.44723,
-      "result_size": 599999,
-      "_random_factor": 1.021689859343567
+      "items_per_second": 3654801642.017539,
+      "result_size": 599999
     },
     {
       "name": "Filter/GreaterThan/5/40",
@@ -1855,12 +1749,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4310,
-      "real_time": 164.46957465682019,
-      "cpu_time": 163.93224738354698,
+      "real_time": 170.4311088512397,
+      "cpu_time": 169.87430505825216,
       "time_unit": "us",
-      "items_per_second": 3648085071.3692737,
-      "result_size": 599999,
-      "_random_factor": 1.013271899441761
+      "items_per_second": 3520478180.563311,
+      "result_size": 599999
     },
     {
       "name": "Filter/GreaterThan/10/40",
@@ -1872,12 +1765,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4313,
-      "real_time": 147.77197751152997,
-      "cpu_time": 147.41057065042185,
+      "real_time": 171.45260498473698,
+      "cpu_time": 171.03328226306934,
       "time_unit": "us",
-      "items_per_second": 4060302975.597554,
-      "result_size": 599999,
-      "_random_factor": 0.904976488405756
+      "items_per_second": 3499503551.1616344,
+      "result_size": 599999
     },
     {
       "name": "Filter/GreaterThan/0/50",
@@ -1889,12 +1781,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4500,
-      "real_time": 144.8875039879926,
-      "cpu_time": 144.45025465554275,
+      "real_time": 163.04317563223472,
+      "cpu_time": 162.5511351336172,
       "time_unit": "us",
-      "items_per_second": 3450946328.963172,
-      "result_size": 499999,
-      "_random_factor": 0.933077257588172
+      "items_per_second": 3066666225.4408817,
+      "result_size": 499999
     },
     {
       "name": "Filter/GreaterThan/5/50",
@@ -1906,12 +1797,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4354,
-      "real_time": 155.6697668318601,
-      "cpu_time": 155.210418030316,
+      "real_time": 168.88195972684852,
+      "cpu_time": 168.3836245177598,
       "time_unit": "us",
-      "items_per_second": 3211921043.988279,
-      "result_size": 499999,
-      "_random_factor": 0.9678550357766108
+      "items_per_second": 2960641863.753261,
+      "result_size": 499999
     },
     {
       "name": "Filter/GreaterThan/10/50",
@@ -1923,12 +1813,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4339,
-      "real_time": 168.26215838525758,
-      "cpu_time": 167.83978844500322,
+      "real_time": 168.54717656180202,
+      "cpu_time": 168.1240911718509,
       "time_unit": "us",
-      "items_per_second": 2971547523.211897,
-      "result_size": 499999,
-      "_random_factor": 1.0482244194683266
+      "items_per_second": 2966522549.9441276,
+      "result_size": 499999
     },
     {
       "name": "Filter/GreaterThan/0/60",
@@ -1940,12 +1829,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4551,
-      "real_time": 166.55012110237234,
-      "cpu_time": 166.12130792454502,
+      "real_time": 166.63454917498433,
+      "cpu_time": 166.20551862193162,
       "time_unit": "us",
-      "items_per_second": 2401673426.3083186,
-      "result_size": 399999,
-      "_random_factor": 1.0494680006236312
+      "items_per_second": 2400456579.865426,
+      "result_size": 399999
     },
     {
       "name": "Filter/GreaterThan/5/60",
@@ -1957,12 +1845,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4298,
-      "real_time": 180.63681777850618,
-      "cpu_time": 180.1988166267247,
+      "real_time": 172.71592133562626,
+      "cpu_time": 172.2971264664166,
       "time_unit": "us",
-      "items_per_second": 2214382454.9127746,
-      "result_size": 399999,
-      "_random_factor": 1.098153877191566
+      "items_per_second": 2315935884.2356586,
+      "result_size": 399999
     },
     {
       "name": "Filter/GreaterThan/10/60",
@@ -1974,12 +1861,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4309,
-      "real_time": 158.0443523157681,
-      "cpu_time": 157.62086780827653,
+      "real_time": 173.37947116423945,
+      "cpu_time": 172.9148957531015,
       "time_unit": "us",
-      "items_per_second": 2530928781.3133206,
-      "result_size": 399999,
-      "_random_factor": 0.9571292888208092
+      "items_per_second": 2307072442.394796,
+      "result_size": 399999
     },
     {
       "name": "Filter/GreaterThan/0/70",
@@ -1991,12 +1877,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4436,
-      "real_time": 173.3992321090554,
-      "cpu_time": 172.9295313270359,
+      "real_time": 166.85726885670698,
+      "cpu_time": 166.4052888293771,
       "time_unit": "us",
-      "items_per_second": 1730105700.8794749,
-      "result_size": 299999,
-      "_random_factor": 1.091167289037104
+      "items_per_second": 1797937854.644091,
+      "result_size": 299999
     },
     {
       "name": "Filter/GreaterThan/5/70",
@@ -2008,12 +1893,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4303,
-      "real_time": 162.32547995340875,
-      "cpu_time": 161.85594663818387,
+      "real_time": 171.0860261334653,
+      "cpu_time": 170.59115256794652,
       "time_unit": "us",
-      "items_per_second": 1848132530.3095164,
-      "result_size": 299999,
-      "_random_factor": 0.9962342208949109
+      "items_per_second": 1753497972.8032777,
+      "result_size": 299999
     },
     {
       "name": "Filter/GreaterThan/10/70",
@@ -2025,12 +1909,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4296,
-      "real_time": 163.24132706801052,
-      "cpu_time": 162.80006835735077,
+      "real_time": 172.66298865301027,
+      "cpu_time": 172.1962621866177,
       "time_unit": "us",
-      "items_per_second": 1837763790.507613,
-      "result_size": 299999,
-      "_random_factor": 0.9927048915264026
+      "items_per_second": 1737482956.4828672,
+      "result_size": 299999
     },
     {
       "name": "Filter/GreaterThan/0/80",
@@ -2042,12 +1925,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4499,
-      "real_time": 156.65355603619665,
-      "cpu_time": 156.08261845491307,
+      "real_time": 162.81026939331275,
+      "cpu_time": 162.21689313191422,
       "time_unit": "us",
-      "items_per_second": 1276696201.8646286,
-      "result_size": 199999,
-      "_random_factor": 1.0102939725543048
+      "items_per_second": 1228417597.6445792,
+      "result_size": 199999
     },
     {
       "name": "Filter/GreaterThan/5/80",
@@ -2059,12 +1941,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4343,
-      "real_time": 160.43226797501433,
-      "cpu_time": 159.93663374937455,
+      "real_time": 171.85706173079095,
+      "cpu_time": 171.32613211926835,
       "time_unit": "us",
-      "items_per_second": 1246625772.5107257,
-      "result_size": 199999,
-      "_random_factor": 0.9801976111848293
+      "items_per_second": 1163752004.0537674,
+      "result_size": 199999
     },
     {
       "name": "Filter/GreaterThan/10/80",
@@ -2076,12 +1957,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4298,
-      "real_time": 159.4436469635903,
-      "cpu_time": 159.06459619480555,
+      "real_time": 171.77456237619683,
+      "cpu_time": 171.3661969055975,
       "time_unit": "us",
-      "items_per_second": 1254355402.7315412,
-      "result_size": 199999,
-      "_random_factor": 0.9746252704467318
+      "items_per_second": 1164310927.2605214,
+      "result_size": 199999
     },
     {
       "name": "Filter/GreaterThan/0/90",
@@ -2093,12 +1973,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4429,
-      "real_time": 164.61839458514334,
-      "cpu_time": 164.13370610010674,
+      "real_time": 164.37931788335916,
+      "cpu_time": 163.89533331555302,
       "time_unit": "us",
-      "items_per_second": 607459453.4347672,
-      "result_size": 99999,
-      "_random_factor": 1.0515271418576606
+      "items_per_second": 608342955.1092166,
+      "result_size": 99999
     },
     {
       "name": "Filter/GreaterThan/5/90",
@@ -2110,12 +1989,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4296,
-      "real_time": 154.72153742674382,
-      "cpu_time": 154.26331977999934,
+      "real_time": 172.66011752742295,
+      "cpu_time": 172.14877363790467,
       "time_unit": "us",
-      "items_per_second": 646315966.4978552,
-      "result_size": 99999,
-      "_random_factor": 0.9409099022087628
+      "items_per_second": 579166755.0794846,
+      "result_size": 99999
     },
     {
       "name": "Filter/GreaterThan/10/90",
@@ -2127,12 +2005,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4296,
-      "real_time": 146.84366842865907,
-      "cpu_time": 146.42055334719635,
+      "real_time": 170.40275244342882,
+      "cpu_time": 169.9117542597611,
       "time_unit": "us",
-      "items_per_second": 680989524.9149433,
-      "result_size": 99999,
-      "_random_factor": 0.9048319328132886
+      "items_per_second": 586839112.4327536,
+      "result_size": 99999
     },
     {
       "name": "Filter/GreaterThan/0/100",
@@ -2144,12 +2021,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4491,
-      "real_time": 147.4007739070556,
-      "cpu_time": 147.00369576483618,
+      "real_time": 167.85737114190871,
+      "cpu_time": 167.40518563891476,
       "time_unit": "us",
       "items_per_second": 0,
-      "result_size": 0,
-      "_random_factor": 0.9220376296228492
+      "result_size": 0
     },
     {
       "name": "Filter/GreaterThan/5/100",
@@ -2161,12 +2037,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4321,
-      "real_time": 177.6237950705632,
-      "cpu_time": 177.12139016924436,
+      "real_time": 171.29487035396832,
+      "cpu_time": 170.81036667357787,
       "time_unit": "us",
       "items_per_second": 0,
-      "result_size": 0,
-      "_random_factor": 1.0887949209377517
+      "result_size": 0
     },
     {
       "name": "Filter/GreaterThan/10/100",
@@ -2178,12 +2053,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4243,
-      "real_time": 155.09524278803715,
-      "cpu_time": 154.72951673650556,
+      "real_time": 173.34615183812437,
+      "cpu_time": 172.93738879342803,
       "time_unit": "us",
       "items_per_second": 0,
-      "result_size": 0,
-      "_random_factor": 0.9394497841493075
+      "result_size": 0
     },
     {
       "name": "FilterPoly/Degree0/FullScan",
@@ -2195,12 +2069,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1,
-      "real_time": 557.3652421822823,
-      "cpu_time": 557.2724657956439,
+      "real_time": 613.2827442000007,
+      "cpu_time": 613.1806600499885,
       "time_unit": "ms",
-      "items_per_second": 1794155652.9155746,
-      "result_size": 1000000,
-      "_random_factor": 0.9542637711987262
+      "items_per_second": 1630569275.6845038,
+      "result_size": 1000000
     },
     {
       "name": "FilterPoly/Degree0/Monotonic",
@@ -2212,12 +2085,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 3754,
-      "real_time": 0.18361833434001004,
-      "cpu_time": 0.18324928958621642,
+      "real_time": 0.1948191008394922,
+      "cpu_time": 0.194427544259034,
       "time_unit": "ms",
-      "items_per_second": 5446079246902.863,
-      "result_size": 1000000,
-      "_random_factor": 0.9896321778830827
+      "items_per_second": 5132966920034.608,
+      "result_size": 1000000
     },
     {
       "name": "FilterPoly/Degree2/FullScan",
@@ -2229,12 +2101,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1,
-      "real_time": 716.8167835213313,
-      "cpu_time": 716.7576720726307,
+      "real_time": 825.2037275998248,
+      "cpu_time": 825.1356781499055,
       "time_unit": "ms",
-      "items_per_second": 697529705.6296127,
-      "result_size": 500001,
-      "_random_factor": 0.9120870368418798
+      "items_per_second": 605912192.6827639,
+      "result_size": 500001
     },
     {
       "name": "FilterPoly/Degree2/Monotonic",
@@ -2246,12 +2117,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 3646,
-      "real_time": 0.18789308166667937,
-      "cpu_time": 0.18753847978751148,
+      "real_time": 0.20186843800074245,
+      "cpu_time": 0.2014874610811838,
       "time_unit": "ms",
-      "items_per_second": 2661093189620.4526,
-      "result_size": 500001,
-      "_random_factor": 0.977308477263235
+      "items_per_second": 2476865650479.552,
+      "result_size": 500001
     },
     {
       "name": "FilterPoly/Degree4/FullScan",
@@ -2263,12 +2133,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1369.5582218048914,
-      "cpu_time": 1368.9323396759344,
+      "real_time": 1354.4692832999942,
+      "cpu_time": 1353.8502967500676,
       "time_unit": "ms",
-      "items_per_second": 545924217.0914545,
-      "result_size": 747675,
-      "_random_factor": 1.0616971168157772
+      "items_per_second": 552005873.6056265,
+      "result_size": 747675
     },
     {
       "name": "FilterPoly/Degree4/Monotonic",
@@ -2280,12 +2149,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 3185,
-      "real_time": 0.23649991974974963,
-      "cpu_time": 0.2360978940532424,
+      "real_time": 0.2299456905498843,
+      "cpu_time": 0.229554806373264,
       "time_unit": "ms",
-      "items_per_second": 3161417563232.774,
-      "result_size": 747675,
-      "_random_factor": 1.079928548099342
+      "items_per_second": 3251528646664.5034,
+      "result_size": 747675
     },
     {
       "name": "Merge/1000",
@@ -2297,12 +2165,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 11464,
-      "real_time": 54.79364433414503,
-      "cpu_time": 54.79633375343901,
+      "real_time": 63.46084805919881,
+      "cpu_time": 63.46396288814032,
       "time_unit": "us",
-      "items_per_second": 36500583.67725117,
-      "result_size": 2000,
-      "_random_factor": 0.9065956146249874
+      "items_per_second": 31515494.374331716,
+      "result_size": 2000
     },
     {
       "name": "Merge/100000",
@@ -2314,12 +2181,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 117,
-      "real_time": 6086.838765947751,
-      "cpu_time": 6086.494240313919,
+      "real_time": 6280.59021153732,
+      "cpu_time": 6280.23471923554,
       "time_unit": "us",
-      "items_per_second": 32857778.510395452,
-      "result_size": 200000,
-      "_random_factor": 1.0176082961923971
+      "items_per_second": 31844140.95869588,
+      "result_size": 200000
     },
     {
       "name": "Merge/200000",
@@ -2331,12 +2197,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 58,
-      "real_time": 10820.847355015807,
-      "cpu_time": 10819.506303113814,
+      "real_time": 12539.547879311518,
+      "cpu_time": 12537.993824995627,
       "time_unit": "us",
-      "items_per_second": 36965681.78781187,
-      "result_size": 400000,
-      "_random_factor": 0.9060844802476579
+      "items_per_second": 31899076.733056977,
+      "result_size": 400000
     },
     {
       "name": "Merge/300000",
@@ -2348,12 +2213,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 39,
-      "real_time": 18794.04024290201,
-      "cpu_time": 18780.583915626627,
+      "real_time": 18857.271273072212,
+      "cpu_time": 18843.769673070747,
       "time_unit": "us",
-      "items_per_second": 31925014.113269415,
-      "result_size": 600000,
-      "_random_factor": 1.0464792052509995
+      "items_per_second": 31817965.139886778,
+      "result_size": 600000
     },
     {
       "name": "Merge/400000",
@@ -2365,12 +2229,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 29,
-      "real_time": 22873.587985325947,
-      "cpu_time": 22870.23041841964,
+      "real_time": 25207.052596542704,
+      "cpu_time": 25203.352505168412,
       "time_unit": "us",
-      "items_per_second": 34974836.50196124,
-      "result_size": 800000,
-      "_random_factor": 0.9527995108752363
+      "items_per_second": 31737149.630485747,
+      "result_size": 800000
     },
     {
       "name": "Merge/500000",
@@ -2382,12 +2245,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 23,
-      "real_time": 29583.788206990233,
-      "cpu_time": 29560.23822368167,
+      "real_time": 31845.6966130431,
+      "cpu_time": 31820.346052173765,
       "time_unit": "us",
-      "items_per_second": 33802297.156917654,
-      "result_size": 1000000,
-      "_random_factor": 0.97542151439756
+      "items_per_second": 31401417.031349484,
+      "result_size": 1000000
     },
     {
       "name": "Merge/600000",
@@ -2399,12 +2261,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 19,
-      "real_time": 35255.14321113706,
-      "cpu_time": 35251.608910086616,
+      "real_time": 38310.753986851414,
+      "cpu_time": 38306.91336316573,
       "time_unit": "us",
-      "items_per_second": 34037586.879548445,
-      "result_size": 1200000,
-      "_random_factor": 0.9662535063757498
+      "items_per_second": 31322797.781840853,
+      "result_size": 1200000
     },
     {
       "name": "Merge/700000",
@@ -2416,12 +2277,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 15,
-      "real_time": 46968.64110594945,
-      "cpu_time": 46928.597695319346,
+      "real_time": 49353.35090000308,
+      "cpu_time": 49311.27439002694,
       "time_unit": "us",
-      "items_per_second": 29807121.66745365,
-      "result_size": 1400000,
-      "_random_factor": 0.9992649386901882
+      "items_per_second": 28366868.195770524,
+      "result_size": 1400000
     },
     {
       "name": "Merge/800000",
@@ -2433,12 +2293,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 13,
-      "real_time": 52170.366550718274,
-      "cpu_time": 52155.82504228223,
+      "real_time": 56587.481434606314,
+      "cpu_time": 56571.70873847516,
       "time_unit": "us",
-      "items_per_second": 30668751.358005773,
-      "result_size": 1600000,
-      "_random_factor": 0.9680389282134392
+      "items_per_second": 28274804.94690321,
+      "result_size": 1600000
     },
     {
       "name": "Merge/900000",
@@ -2450,12 +2309,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 12,
-      "real_time": 57784.279612985185,
-      "cpu_time": 57741.45313681683,
+      "real_time": 63918.18999998407,
+      "cpu_time": 63870.81741250712,
       "time_unit": "us",
-      "items_per_second": 31150340.751076996,
-      "result_size": 1800000,
-      "_random_factor": 0.9492367289131556
+      "items_per_second": 28160997.67531666,
+      "result_size": 1800000
     },
     {
       "name": "Merge/1000000",
@@ -2467,12 +2325,11 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 10,
-      "real_time": 73623.97558348863,
-      "cpu_time": 73608.03111367184,
+      "real_time": 71400.45370497149,
+      "cpu_time": 71384.99077499546,
       "time_unit": "us",
-      "items_per_second": 27165063.88237655,
-      "result_size": 2000000,
-      "_random_factor": 1.0826986433740329
+      "items_per_second": 28011026.488207646,
+      "result_size": 2000000
     },
     {
       "name": "Copy/1000",
@@ -2484,13 +2341,12 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 901169,
-      "real_time": 0.7259431929107264,
-      "cpu_time": 0.7258629703938843,
+      "real_time": 0.807914801774164,
+      "cpu_time": 0.8078255207402962,
       "time_unit": "us",
       "bytes_per_second": 10398285006.274858,
       "result_size": 1000,
-      "items_per_second": 1377518254.548846,
-      "_random_factor": 0.9434662552071071
+      "items_per_second": 1237754275.3320289
     },
     {
       "name": "Copy/100000",
@@ -2502,13 +2358,12 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 9189,
-      "real_time": 72.92926322601707,
-      "cpu_time": 72.87088506578486,
+      "real_time": 80.35187264119875,
+      "cpu_time": 80.2875528566773,
       "time_unit": "us",
       "bytes_per_second": 10462393859.475311,
       "result_size": 100000,
-      "items_per_second": 1371191694.2049348,
-      "_random_factor": 0.9530048755584983
+      "items_per_second": 1244526066.5739243
     },
     {
       "name": "Copy/200000",
@@ -2520,13 +2375,12 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 4556,
-      "real_time": 139.8428737934731,
-      "cpu_time": 139.77404983561763,
+      "real_time": 162.4287880377584,
+      "cpu_time": 162.34884837577079,
       "time_unit": "us",
       "bytes_per_second": 10348086954.774641,
       "result_size": 200000,
-      "items_per_second": 1430176558.695225,
-      "_random_factor": 0.9039962635749847
+      "items_per_second": 1231308824.1076314
     },
     {
       "name": "Copy/300000",
@@ -2538,13 +2392,12 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 3025,
-      "real_time": 245.64909416019648,
-      "cpu_time": 245.39295784494362,
+      "real_time": 243.1798326942202,
+      "cpu_time": 242.92627105784194,
       "time_unit": "us",
       "bytes_per_second": 10373517812.735765,
       "result_size": 300000,
-      "items_per_second": 1221254248.9750009,
-      "_random_factor": 1.0606617580518498
+      "items_per_second": 1233654932.139158
     },
     {
       "name": "Copy/400000",
@@ -2556,13 +2409,12 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 2278,
-      "real_time": 339.0763769492302,
-      "cpu_time": 339.0662144513915,
+      "real_time": 324.02354604916997,
+      "cpu_time": 324.01383470149057,
       "time_unit": "us",
       "bytes_per_second": 10369927577.615694,
       "result_size": 400000,
-      "items_per_second": 1179675221.2552156,
-      "_random_factor": 1.098778777461638
+      "items_per_second": 1234478188.0119932
     },
     {
       "name": "Copy/500000",
@@ -2574,13 +2426,12 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1815,
-      "real_time": 363.10956645220887,
-      "cpu_time": 363.0986521184621,
+      "real_time": 406.35263338840036,
+      "cpu_time": 406.3404192561674,
       "time_unit": "us",
       "bytes_per_second": 10336161014.177158,
       "result_size": 500000,
-      "items_per_second": 1376994841.7644022,
-      "_random_factor": 0.9382615330817808
+      "items_per_second": 1230458372.6472116
     },
     {
       "name": "Copy/600000",
@@ -2592,13 +2443,12 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1500,
-      "real_time": 495.38126777899674,
-      "cpu_time": 495.3706399327414,
+      "real_time": 490.49887600002654,
+      "cpu_time": 490.48835289997896,
       "time_unit": "us",
       "bytes_per_second": 10275473352.631807,
       "result_size": 600000,
-      "items_per_second": 1211188308.936374,
-      "_random_factor": 1.0604516271468856
+      "items_per_second": 1223244393.3265355
     },
     {
       "name": "Copy/700000",
@@ -2610,13 +2460,12 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1231,
-      "real_time": 511.4825503737775,
-      "cpu_time": 511.4278127901586,
+      "real_time": 574.1827634037841,
+      "cpu_time": 574.1213158001436,
       "time_unit": "us",
       "bytes_per_second": 10241737831.672628,
       "result_size": 700000,
-      "items_per_second": 1368570637.431246,
-      "_random_factor": 0.9353409961468847
+      "items_per_second": 1219124022.2022083
     },
     {
       "name": "Copy/800000",
@@ -2628,13 +2477,12 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1101,
-      "real_time": 700.702287242451,
-      "cpu_time": 700.666907912949,
+      "real_time": 668.9750949591164,
+      "cpu_time": 668.9413175749918,
       "time_unit": "us",
       "bytes_per_second": 10045724226.39547,
       "result_size": 800000,
-      "items_per_second": 1141711700.6258478,
-      "_random_factor": 1.0997978955397993
+      "items_per_second": 1195859167.2966406
     },
     {
       "name": "Copy/900000",
@@ -2646,13 +2494,12 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 953,
-      "real_time": 743.6861211695867,
-      "cpu_time": 743.6530336157354,
+      "real_time": 772.0930910808665,
+      "cpu_time": 772.0587396643183,
       "time_unit": "us",
       "bytes_per_second": 9792001063.6587,
       "result_size": 900000,
-      "items_per_second": 1210187973.6367545,
-      "_random_factor": 1.0113682355775415
+      "items_per_second": 1165662548.2039664
     },
     {
       "name": "Copy/1000000",
@@ -2664,13 +2511,12 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 829,
-      "real_time": 826.7969820359934,
-      "cpu_time": 826.6291306483735,
+      "real_time": 898.3967898672715,
+      "cpu_time": 898.21440271409,
       "time_unit": "us",
       "bytes_per_second": 9351887449.83173,
       "result_size": 1000000,
-      "items_per_second": 1209486756.3951344,
-      "_random_factor": 0.9663178240719794
+      "items_per_second": 1113093914.9367833
     }
   ]
 }

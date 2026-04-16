@@ -14,7 +14,10 @@
     <h1>Benchmark <span>Viewer</span></h1>
     <div id="meta-wrap">
       <div id="meta">Drop a bench_results.json to begin.</div>
-      <div>
+      <div id="meta-actions">
+        <button id="new-view-btn" class="file-btn" title="Start a new benchmark view">New benchmark</button>
+        <button id="compare-btn" class="file-btn" title="Load compare benchmark JSON" disabled>Compare</button>
+        <input type="file" id="compare-file-input" accept=".json" hidden>
         <button id="theme-toggle" class="file-btn" aria-pressed="false" title="Toggle light / dark theme">🌙 Dark</button>
       </div>
     </div>
