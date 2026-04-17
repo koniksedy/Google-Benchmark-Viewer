@@ -345,6 +345,7 @@ export function buildPanel(group, runs, compareRuns = []) {
     nextSeriesColorIdx: 0,
     scatterPair: null,
     scatterPairPrompting: false,
+    hiddenLegendByGraph: new Map(),
   };
 
   try {
@@ -982,6 +983,8 @@ export function buildPanel(group, runs, compareRuns = []) {
     grid.className = 'chart-grid';
 
     const requestedGraphType = state.graphType || 'line';
+    const visibilityKey = [requestedGraphType, titleSuffix || '', xSource, seriesSource].join('|');
+    const hiddenLegend = state.hiddenLegendByGraph.get(visibilityKey) || new Set();
     const graphLabel =
       requestedGraphType === 'histogram' ? 'Histogram'
       : requestedGraphType === 'scatter' ? 'Scatter'
@@ -992,6 +995,7 @@ export function buildPanel(group, runs, compareRuns = []) {
       function buildLineOrHistogramDatasets(asLine) {
         const datasets = [];
         const numericX = xIsNumeric ? xNumericValues : null;
+        const usePointObjects = asLine && xIsNumeric;
         const hasRealPoint = arr => arr.some(v => {
           if (v == null) return false;
           if (typeof v === 'object') return v.y != null && Number.isFinite(Number(v.y));
@@ -1004,15 +1008,15 @@ export function buildPanel(group, runs, compareRuns = []) {
 
           const baseData = xKeys.map((xk, idx) => {
             const ns = lookup.get(`${sk}|${xk}`);
-            if (ns == null) return xIsNumeric ? { x: numericX[idx], y: null } : null;
+            if (ns == null) return usePointObjects ? { x: numericX[idx], y: null } : null;
             const y = toUnit(ns, unit);
-            return xIsNumeric ? { x: numericX[idx], y } : y;
+            return usePointObjects ? { x: numericX[idx], y } : y;
           });
           const compData = xKeys.map((xk, idx) => {
             const ns = compareLookup.get(`${sk}|${xk}`);
-            if (ns == null) return xIsNumeric ? { x: numericX[idx], y: null } : null;
+            if (ns == null) return usePointObjects ? { x: numericX[idx], y: null } : null;
             const y = toUnit(ns, unit);
-            return xIsNumeric ? { x: numericX[idx], y } : y;
+            return usePointObjects ? { x: numericX[idx], y } : y;
           });
 
           const col = colorForSeries(sk);
@@ -1286,10 +1290,11 @@ export function buildPanel(group, runs, compareRuns = []) {
 
       if (requestedGraphType === 'histogram') {
         chartType = 'bar';
+        chartLabels = labels;
         datasets = buildLineOrHistogramDatasets(false);
         opts = {
           ...chartBase,
-          xType: xIsNumeric ? (state.logX && xCanLog ? 'logarithmic' : 'linear') : 'category',
+          xType: 'category',
           yLog: state.logY,
         };
       } else if (requestedGraphType === 'scatter') {
@@ -1345,7 +1350,29 @@ export function buildPanel(group, runs, compareRuns = []) {
       }
 
       const ch = mkChart(canvas, chartType, chartLabels, datasets, opts);
-      return { datasets, legendDatasets, chart: ch, square, noLegend: hideLegend };
+
+      // Preserve legend hidden/visible state across chart rebuilds.
+      if (hiddenLegend && hiddenLegend.size && ch && Array.isArray(ch.data && ch.data.datasets)) {
+        ch.data.datasets.forEach((ds, idx) => {
+          if (!ds || ds.__auxiliary) return;
+          if (hiddenLegend.has(String(ds.label || ''))) ch.setDatasetVisibility(idx, false);
+        });
+        try { ch.update(); } catch (e) {}
+      }
+
+      const onLegendToggle = ({ label, visible }) => {
+        const key = String(label || '');
+        if (!key) return;
+        let set = state.hiddenLegendByGraph.get(visibilityKey);
+        if (!set) {
+          set = new Set();
+          state.hiddenLegendByGraph.set(visibilityKey, set);
+        }
+        if (visible) set.delete(key);
+        else set.add(key);
+      };
+
+      return { datasets, legendDatasets, chart: ch, square, noLegend: hideLegend, onLegendToggle };
     }));
 
     return grid;

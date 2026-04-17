@@ -243,18 +243,28 @@ export function legendHtml(datasets) {
     }).join('') + '</div>';
 }
 
-function bindLegendToggle(legEl, chart) {
+function bindLegendToggle(legEl, chart, onToggle) {
   if (!legEl || !chart) return;
   const items = legEl.querySelectorAll('.legend-item[data-ds-index]');
   items.forEach(item => {
     const idx = Number(item.getAttribute('data-ds-index'));
     if (!Number.isFinite(idx)) return;
     item.style.cursor = 'pointer';
+    item.classList.toggle('off', !chart.isDatasetVisible(idx));
     item.addEventListener('click', () => {
       const isVisible = chart.isDatasetVisible(idx);
       chart.setDatasetVisibility(idx, !isVisible);
       item.classList.toggle('off', isVisible);
       try { chart.update(); } catch (e) {}
+      if (typeof onToggle === 'function') {
+        const ds = chart.data && Array.isArray(chart.data.datasets) ? chart.data.datasets[idx] : null;
+        const label = ds && ds.label != null ? String(ds.label) : '';
+        onToggle({
+          index: idx,
+          label,
+          visible: !isVisible,
+        });
+      }
     });
   });
 }
@@ -293,7 +303,10 @@ export function chartCard(titleStr, subStr, heightPx, drawFn) {
         return;
       }
       legEl.innerHTML = legendHtml(legendDatasets);
-      if (chart) bindLegendToggle(legEl, chart);
+      if (chart) {
+        const onLegendToggle = out && !Array.isArray(out) ? out.onLegendToggle : null;
+        bindLegendToggle(legEl, chart, onLegendToggle);
+      }
     }
   });
   return el;
