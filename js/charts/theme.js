@@ -65,8 +65,11 @@ export function updateChartColors() {
     for (const chart of allCharts) {
         chart.data.datasets.forEach((ds, index) => {
             if (ds && ds.__auxiliary) {
-                ds.borderColor = muted;
-                ds.backgroundColor = 'transparent';
+                const auxPaletteIdx = Number.isFinite(ds.__paletteIdx) ? ds.__paletteIdx : index;
+                ds.borderColor = colors[auxPaletteIdx % colors.length];
+                if (typeof ds.backgroundColor === 'string' && ds.backgroundColor !== 'transparent') {
+                    ds.backgroundColor = colors[auxPaletteIdx % colors.length] + '22';
+                }
                 return;
             }
 

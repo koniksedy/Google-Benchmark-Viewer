@@ -7,6 +7,83 @@ import { fmtVal, fmtTickNumber } from '../utils/number.js';
 import { addChart } from './registry.js';
 import { getColors, getMuted, getGridColor } from './theme.js';
 
+function isLogMajorTick(value) {
+    const n = Number(value);
+    if (!Number.isFinite(n) || n <= 0) return false;
+    const exp = Math.floor(Math.log10(n));
+    const mantissa = n / (10 ** exp);
+    // Keep only 1, 2, 5 per decade to avoid overly dense log grids.
+    return Math.abs(mantissa - 1) < 1e-10
+        || Math.abs(mantissa - 2) < 1e-10
+        || Math.abs(mantissa - 5) < 1e-10;
+}
+
+function isLogTickFromSet(value, mantissas) {
+    const n = Number(value);
+    if (!Number.isFinite(n) || n <= 0) return false;
+    const exp = Math.floor(Math.log10(n));
+    const m = n / (10 ** exp);
+    return mantissas.some(v => Math.abs(m - v) < 1e-10);
+}
+
+function mantissasForLogSpan(spanDecades) {
+    // Keep more guidance on narrow ranges, fewer lines on wide ranges.
+    if (spanDecades <= 0.75) return [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    if (spanDecades <= 1.5) return [1, 2, 3, 5, 7];
+    if (spanDecades <= 2.5) return [1, 2, 5];
+    return [1];
+}
+
+function applyLogTickDensity(scale) {
+    if (!scale) return;
+    scale.afterBuildTicks = axis => {
+        if (!axis || !Array.isArray(axis.ticks)) return;
+        const min = Number(axis.min);
+        const max = Number(axis.max);
+        const spanDecades = (Number.isFinite(min) && Number.isFinite(max) && min > 0 && max > min)
+            ? Math.log10(max / min)
+            : Infinity;
+
+        const primarySet = mantissasForLogSpan(spanDecades);
+        const inRangeTicks = axis.ticks.filter(t => {
+            const v = Number(t && t.value);
+            return Number.isFinite(v)
+                && (!Number.isFinite(min) || v >= min)
+                && (!Number.isFinite(max) || v <= max);
+        });
+
+        let filtered = axis.ticks.filter(t => isLogTickFromSet(t && t.value, primarySet));
+
+        // Guard against over-thinning when data range is very tight.
+        if (filtered.length < 4) {
+            filtered = axis.ticks.filter(t => isLogMajorTick(t && t.value));
+        }
+
+        // If filtering still leaves too little guidance inside the visible range,
+        // keep the original in-range ticks (optionally downsampled to avoid clutter).
+        const filteredInRangeCount = filtered.filter(t => {
+            const v = Number(t && t.value);
+            return Number.isFinite(v)
+                && (!Number.isFinite(min) || v >= min)
+                && (!Number.isFinite(max) || v <= max);
+        }).length;
+
+        if (filteredInRangeCount < 3 && inRangeTicks.length) {
+            if (inRangeTicks.length <= 10) {
+                axis.ticks = inRangeTicks;
+                return;
+            }
+
+            const step = Math.ceil(inRangeTicks.length / 10);
+            const downsampled = inRangeTicks.filter((_, idx) => idx % step === 0);
+            axis.ticks = downsampled.length ? downsampled : inRangeTicks;
+            return;
+        }
+
+        if (filtered.length) axis.ticks = filtered;
+    };
+}
+
 /**
  * Create a Chart.js chart mounted on `canvas`.
  * Returns the created Chart instance.
@@ -50,6 +127,9 @@ export function mkChart(canvas, type, labels, datasets, opts) {
 
     if (opts && opts.xLog) xScale.type = 'logarithmic';
     if (opts && opts.yLog) yScale.type = 'logarithmic';
+
+    if (xScale.type === 'logarithmic') applyLogTickDensity(xScale);
+    if (yScale.type === 'logarithmic') applyLogTickDensity(yScale);
 
     if (yTickFormatter) {
         yScale.ticks = {

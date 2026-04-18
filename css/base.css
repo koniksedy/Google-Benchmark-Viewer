@@ -4,8 +4,8 @@
     --surface: #121524;
     --surface2: #161a2a;
     --border: #2a3244;
-    --accent: #60a8f0;
-    --accent-rgb: 96, 168, 240;
+    --accent: #4af0c4;
+    --accent-rgb: 74, 240, 196;
     --accent2: #f06060;
     --accent3: #f0c040;
     --accent4: #60a8f0;
@@ -176,6 +176,34 @@ body.light {
 #drop-zone .hint {
     font-size: 11px;
     color: var(--muted);
+}
+
+.drop-help-panel {
+    margin: -12px 0 32px;
+    padding: 18px 22px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.drop-help-panel h2 {
+    margin: 0 0 8px;
+    font-family: var(--font-head);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text);
+}
+
+.drop-help-panel p {
+    margin: 0 0 10px;
+    font-size: 13px;
+}
+
+.help-main {
+    flex: 1 1 60%;
 }
 
 #drop-zone button,

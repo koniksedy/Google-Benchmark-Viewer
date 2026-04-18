@@ -43,6 +43,8 @@ export function resetViewer(state) {
     if (panels) panels.innerHTML = '';
     if (content) content.style.display = 'none';
     if (dropZone) dropZone.style.display = 'block';
+    const help = document.querySelector('.drop-help-panel');
+    if (help) help.style.display = '';
     if (meta) meta.textContent = 'Drop a bench_results.json to begin.';
 
     if (compareBtn) {
@@ -157,8 +159,12 @@ export function loadIntoViewer(data, state) {
     renderSummary(benchmarks, groups);
     renderTabsAndPanels(groups, state);
 
-    document.getElementById('drop-zone').style.display = 'none';
-    document.getElementById('content').style.display = 'block';
+    const dropZoneEl = document.getElementById('drop-zone');
+    if (dropZoneEl) dropZoneEl.style.display = 'none';
+    const help = document.querySelector('.drop-help-panel');
+    if (help) help.style.display = 'none';
+    const contentEl = document.getElementById('content');
+    if (contentEl) contentEl.style.display = 'block';
     updateCompareButton(state);
 }
 

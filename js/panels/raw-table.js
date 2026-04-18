@@ -1,5 +1,5 @@
 /*
- * rawTable.js
+ * raw-table.js
  * Build grouped/flat raw benchmark tables for a panel.
  */
 

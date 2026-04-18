@@ -121,21 +121,20 @@ export function buildScatter({
     const mainDataset = {
         label: `${syLabel} vs ${sxLabel}`,
         data: pts,
-        borderColor: '#000000',
-        backgroundColor: '#000000',
+        // Pin scatter points to palette slot 0 to match line-chart primary color.
+        __paletteIdx: 0,
         borderWidth: 1,
         pointRadius: 5,
         pointHoverRadius: 6,
         pointStyle: 'crossRot',
-        pointBackgroundColor: '#000000',
-        pointBorderColor: '#000000',
         pointBorderWidth: 2,
         showLine: false,
     };
     const diagDataset = {
         label: 'y = x',
         data: [{ x: minVal, y: minVal }, { x: maxVal, y: maxVal }],
-        borderColor: '#d33',
+        // Pin diagonal to palette slot 1 (red) in both themes.
+        __paletteIdx: 1,
         backgroundColor: 'transparent',
         borderDash: [6, 4],
         pointRadius: 0,

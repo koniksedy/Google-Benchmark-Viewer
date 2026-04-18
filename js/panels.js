@@ -6,7 +6,7 @@
  */
 import { parseName } from './utils/bench.js';
 import { getColors } from './charts.js';
-import { buildTable } from './panels/rawTable.js';
+import { buildTable } from './panels/raw-table.js';
 import { buildChartGrid } from './panels/chart-grid.js';
 import { subtypeBuckets, buildSubtypeFilterBar } from './panels/subtype-filters.js';
 import { buildGraphDisplayStudio } from './panels/graph-studio.js';
