@@ -102,17 +102,29 @@ export function mkChart(canvas, type, labels, datasets, opts) {
     type,
     data: {
       labels,
-      datasets: datasets.map((ds, i) => ({
-        borderColor:     colors[i % colors.length],
-        backgroundColor: type === 'line'
-          ? colors[i % colors.length] + '22'
-          : colors[i % colors.length] + 'bb',
-        borderWidth: type === 'line' ? 2 : 1,
-        pointRadius: 3,
-        tension: 0.3,
-        fill: false,
-        ...ds,
-      }))
+      datasets: datasets.map((ds, i) => {
+        const src = { ...(ds || {}) };
+        // prefer explicit palette index stored on the dataset; otherwise use index
+        const pidx = Number.isFinite(src.__paletteIdx) ? src.__paletteIdx : i;
+        const col = colors[pidx % colors.length];
+
+        // If backgroundColor is a non-string (e.g. CanvasPattern) keep it.
+        const bg = (src.backgroundColor && typeof src.backgroundColor !== 'string')
+          ? src.backgroundColor
+          : (typeof src.backgroundColor === 'string' ? src.backgroundColor : (type === 'line' ? col + '22' : col + 'bb'));
+
+        return {
+          // defaults (dataset props may override other fields but we intentionally
+          // choose color from palette index so theme changes stay consistent)
+          ...src,
+          borderColor: col,
+          backgroundColor: bg,
+          borderWidth: src.borderWidth != null ? src.borderWidth : (type === 'line' ? 2 : 1),
+          pointRadius: src.pointRadius != null ? src.pointRadius : 3,
+          tension: src.tension != null ? src.tension : 0.3,
+          fill: src.fill != null ? src.fill : false,
+        };
+      })
     },
     options: {
       responsive: true,
@@ -171,9 +183,15 @@ export function updateChartColors(){
         ds.backgroundColor = 'transparent';
         return;
       }
-      const col = colors[i % colors.length];
+      const pidx = ds && Number.isFinite(ds.__paletteIdx) ? ds.__paletteIdx : i;
+      const col = colors[pidx % colors.length];
       ds.borderColor = col;
-      ds.backgroundColor = c.config.type === 'line' ? col + '22' : col + 'bb';
+      // keep non-string background (CanvasPattern) as-is, otherwise set palette-based
+      if (ds && ds.backgroundColor && typeof ds.backgroundColor !== 'string') {
+        // leave pattern intact
+      } else {
+        ds.backgroundColor = c.config.type === 'line' ? col + '22' : col + 'bb';
+      }
     });
     if (c.options && c.options.scales) {
       if (c.options.scales.x) {
@@ -200,14 +218,35 @@ export function updateLegends(){
     items.forEach((item, i) => {
       const d = item.querySelector('.legend-dot');
       if (!d) return;
-      const col = colors[i % colors.length];
-      if (d.style.backgroundImage) {
+
+      // Prefer an explicit palette index saved on the legend item (set by legendHtml)
+      // so the same palette slot is used across theme changes. Fallback to index.
+      const pidxAttr = item.getAttribute('data-legend-palette-index');
+      const paletteIdx = pidxAttr && pidxAttr !== '' ? Number(pidxAttr) : null;
+      const col = (Number.isFinite(paletteIdx) ? colors[paletteIdx % colors.length] : colors[i % colors.length]);
+      const mode = item.getAttribute('data-legend-mode') || 'solid';
+
+      // Reset style first so mode switches never keep stale hatch/dash artifacts.
+      d.style.background = 'transparent';
+      d.style.backgroundImage = 'none';
+      d.style.border = 'none';
+      d.style.width = '10px';
+      d.style.height = '10px';
+      d.style.display = '';
+      d.style.verticalAlign = '';
+      d.style.borderRadius = '2px';
+
+      if (mode === 'hatch') {
         d.style.backgroundImage = `repeating-linear-gradient(45deg, ${col} 0, ${col} 1px, transparent 1px, transparent 4px)`;
         d.style.border = `1px solid ${col}`;
-      } else if ((d.style.borderStyle || '').includes('dashed')) {
+      } else if (mode === 'dashed') {
         d.style.border = `2px dashed ${col}`;
+        d.style.width = '12px';
+        d.style.height = '8px';
+        d.style.display = 'inline-block';
+        d.style.verticalAlign = 'middle';
       } else {
-        d.style.background = col;
+        d.style.backgroundColor = col;
       }
     });
   });
@@ -223,6 +262,9 @@ export function legendHtml(datasets) {
         ? ds.borderColor
         : colors[i % colors.length];
       const isCompare = !!(ds && ds.__compare);
+      const mode = isCompare && ds && ds.__hatch
+        ? 'hatch'
+        : (isCompare && ds && ds.__dashed ? 'dashed' : 'solid');
       const tip = isCompare && ds.__hatch
         ? `${ds.label} (compare, hatched)`
         : (isCompare && ds.__dashed
@@ -239,7 +281,8 @@ export function legendHtml(datasets) {
       } else {
         dotHtml = `<span class="legend-dot" style="background:${color}"></span>`;
       }
-      return `<span class="legend-item" data-ds-index="${i}" title="${esc(tip)}">${dotHtml}${esc(ds.label)}</span>`;
+      const paletteAttr = (ds && Number.isFinite(ds.__paletteIdx)) ? ` data-legend-palette-index="${ds.__paletteIdx}"` : '';
+      return `<span class="legend-item" data-ds-index="${i}" data-legend-mode="${mode}"${paletteAttr} title="${esc(tip)}">${dotHtml}${esc(ds.label)}</span>`;
     }).join('') + '</div>';
 }
 

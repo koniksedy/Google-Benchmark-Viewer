@@ -341,6 +341,7 @@ export function buildPanel(group, runs, compareRuns = []) {
     logY: false,
     focus: { xMin: '', xMax: '', yMin: '', yMax: '' },
     overrides: new Map(),
+    // label -> palette index (not raw color) so theme changes keep mapping stable
     seriesColorMap: new Map(),
     nextSeriesColorIdx: 0,
     scatterPair: null,
@@ -712,12 +713,15 @@ export function buildPanel(group, runs, compareRuns = []) {
 
   function colorForSeries(label) {
     const key = String(label);
-    if (state.seriesColorMap.has(key)) return state.seriesColorMap.get(key);
     const palette = getColors();
-    const col = palette[state.nextSeriesColorIdx % palette.length];
+    if (state.seriesColorMap.has(key)) {
+      const idx = state.seriesColorMap.get(key);
+      return palette[idx % palette.length];
+    }
+    const idx = state.nextSeriesColorIdx;
     state.nextSeriesColorIdx += 1;
-    state.seriesColorMap.set(key, col);
-    return col;
+    state.seriesColorMap.set(key, idx);
+    return palette[idx % palette.length];
   }
 
   function axisInfoFromSource(runsSubset, source, depth) {
@@ -1027,6 +1031,7 @@ export function buildPanel(group, runs, compareRuns = []) {
               data: baseData,
               borderColor: col,
               backgroundColor: asLine ? col + '22' : col + 'bb',
+              __paletteIdx: state.seriesColorMap.get(String(sk)),
               borderWidth: asLine ? 2 : 1,
               pointRadius: asLine ? 3 : 0,
               tension: 0.3,
@@ -1039,6 +1044,7 @@ export function buildPanel(group, runs, compareRuns = []) {
                 label: compLabel,
                 data: compData,
                 borderColor: col,
+                __paletteIdx: state.seriesColorMap.get(String(sk)),
                 backgroundColor: col + '22',
                 borderDash: [7, 5],
                 pointRadius: 2,
@@ -1064,6 +1070,7 @@ export function buildPanel(group, runs, compareRuns = []) {
                 label: compLabel,
                 data: compData,
                 borderColor: col,
+                __paletteIdx: state.seriesColorMap.get(String(sk)),
                 backgroundColor: pattern,
                 borderWidth: 1,
                 __hatch: col,
@@ -1111,6 +1118,7 @@ export function buildPanel(group, runs, compareRuns = []) {
               data: basePoints,
               borderColor: col,
               backgroundColor: col + '22',
+              __paletteIdx: state.seriesColorMap.get(String(sk)),
               borderWidth: 2,
               pointRadius: 0,
               tension: 0.15,
@@ -1122,6 +1130,7 @@ export function buildPanel(group, runs, compareRuns = []) {
               data: compPoints,
               borderColor: col,
               backgroundColor: col + '22',
+              __paletteIdx: state.seriesColorMap.get(String(sk)),
               borderDash: [7, 5],
               borderWidth: 2,
               pointRadius: 0,

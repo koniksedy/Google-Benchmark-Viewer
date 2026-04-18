@@ -89,17 +89,20 @@ body.light {
 
 /* ── drop zone ── */
 #drop-zone {
-  border: 1.5px dashed var(--border);
+  border: 1.5px solid rgba(255,255,255,0.06);
   border-radius: 8px;
   padding: 60px 32px;
   text-align: center;
   cursor: pointer;
-  transition: border-color .2s, background .2s;
+  transition: border-color .2s, background .2s, box-shadow .2s;
   margin-bottom: 40px;
+  background: rgba(255,255,255,0.006);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.02);
 }
 #drop-zone:hover, #drop-zone.over {
   border-color: var(--accent);
   background: rgba(var(--accent-rgb), .04);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.36), 0 0 0 3px rgba(var(--accent-rgb), .04);
 }
 #drop-zone p { color: var(--muted); margin-bottom: 12px; font-size: 14px; }
 #drop-zone strong { color: var(--accent); font-weight: 500; }
@@ -415,7 +418,7 @@ body.light {
 .chart-wrap { position: relative; height: 260px; }
 .chart-wrap.square {
   height: auto;
-  
+
   min-height: 320px;
 }
 
@@ -522,6 +525,14 @@ body.light {
   border-radius: 6px;
   padding: 6px 8px;
   font-family: var(--font-mono);
+  /* Ensure long option labels fit the control area: stretch to container
+     and show ellipsis when necessary. Allow the grid column to shrink. */
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .scatter-pair-actions {
   display: flex;
