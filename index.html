@@ -26,12 +26,12 @@
       </div>
     </header>
 
-    <div id="drop-zone">
+    <div id="drop-zone" title="Drop a Google Benchmark JSON file here, or click to browse">
       <p>Drop <strong>bench_results.json</strong> here, or click to browse</p>
       <p class="hint">This viewer displays Google Benchmark JSON output (generate with
         <code>--benchmark_format=json</code>).
       </p>
-      <button onclick="document.getElementById('file-input').click()">Choose file</button>
+      <button title="Open file picker to choose a benchmark JSON" onclick="document.getElementById('file-input').click()">Choose file</button>
       <input type="file" id="file-input" accept=".json">
     </div>
 
