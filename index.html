@@ -1,54 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Benchmark viewer</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benchmark viewer</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-<div id="app">
-  <header>
-    <h1>Benchmark <span>Viewer</span></h1>
-    <div id="meta-wrap">
-      <div id="meta">Drop a bench_results.json to begin.</div>
-      <div id="meta-actions">
-        <button id="new-view-btn" class="file-btn" title="Start a new benchmark view" style="display:none">New benchmark</button>
-        <button id="compare-btn" class="file-btn" title="Load compare benchmark JSON" disabled style="display:none">Compare</button>
-        <input type="file" id="compare-file-input" accept=".json" hidden>
-        <button id="theme-toggle" class="file-btn" aria-pressed="false" title="Toggle light / dark theme">🌙 Dark</button>
+  <div id="app">
+    <header>
+      <h1>Benchmark <span>Viewer</span></h1>
+      <div id="meta-wrap">
+        <div id="meta">Drop a bench_results.json to begin.</div>
+        <div id="meta-actions">
+          <button id="new-view-btn" class="file-btn" title="Start a new benchmark view" style="display:none">New
+            benchmark</button>
+          <button id="compare-btn" class="file-btn" title="Load compare benchmark JSON" disabled
+            style="display:none">Compare</button>
+          <input type="file" id="compare-file-input" accept=".json" hidden>
+          <button id="theme-toggle" class="file-btn" aria-pressed="false" title="Toggle light / dark theme">🌙
+            Dark</button>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-<div id="drop-zone">
-  <p>Drop <strong>bench_results.json</strong> here, or click to browse</p>
-  <p class="hint">Any Google Benchmark JSON (use  <code>--benchmark_format=json</code> to generate)</p>
-  <button onclick="document.getElementById('file-input').click()">Choose file</button>
-  <input type="file" id="file-input" accept=".json">
-</div>
-
-<div id="content">
-  <div class="summary-grid" id="summary"></div>
-  <div id="parse-config-wrap" class="parse-config-wrap" hidden>
-    <button id="parse-config-toggle" class="parse-config-toggle" type="button" aria-expanded="false">▶ Parse config</button>
-    <div id="parse-config-panel" class="parse-config-panel" hidden>
-      <p class="parse-config-desc">Choose how benchmark name segments map to hierarchy, series, and x-axis.</p>
-      <div id="parse-config-example" class="parse-config-example">-</div>
-      <div id="parse-config-roles" class="parse-config-roles"></div>
-      <div class="parse-config-actions">
-        <button id="parse-config-apply" class="file-btn" type="button">Apply roles</button>
-        <button id="parse-config-reset" class="file-btn" type="button">Reset auto</button>
-      </div>
+    <div id="drop-zone">
+      <p>Drop <strong>bench_results.json</strong> here, or click to browse</p>
+      <p class="hint">Any Google Benchmark JSON (use <code>--benchmark_format=json</code> to generate)</p>
+      <button onclick="document.getElementById('file-input').click()">Choose file</button>
+      <input type="file" id="file-input" accept=".json">
     </div>
+
+    <div id="content">
+      <div class="summary-grid" id="summary"></div>
+      <div class="tab-bar" id="tabs"></div>
+      <div id="panels"></div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
   </div>
-  <div class="tab-bar"      id="tabs"></div>
-  <div                      id="panels"></div>
-</div>
-
-<script type="module" src="js/main.js"></script>
-</div>
 </body>
 </html>

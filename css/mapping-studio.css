@@ -1,0 +1,301 @@
+/* Mapping Studio */
+
+.mapping-studio {
+    margin-bottom: 18px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: linear-gradient(180deg, var(--surface) 0%, rgba(var(--accent-rgb), .03) 100%);
+    box-shadow: inset 0 1px 0 rgba(var(--accent-rgb), .15);
+    padding: 16px;
+}
+
+.mapping-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.mapping-head-main {
+    min-width: 220px;
+}
+
+.mapping-head-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.mapping-title {
+    color: var(--text);
+    font-family: var(--font-head);
+    font-size: 14px;
+    letter-spacing: .02em;
+}
+
+.mapping-sub {
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.mapping-ydata {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: var(--surface2);
+    color: var(--muted);
+    font-size: 11px;
+    padding: 4px 8px;
+}
+
+.mapping-ydata span {
+    letter-spacing: .07em;
+    text-transform: uppercase;
+}
+
+.mapping-ydata select {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 5px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 3px 6px;
+}
+
+.mapping-role-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.role-pill {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+}
+
+.role-pill.role-subtype {
+    border-color: var(--role-subtype);
+    color: var(--role-subtype);
+}
+
+.role-pill.role-series {
+    border-color: var(--role-series);
+    color: var(--role-series);
+}
+
+.role-pill.role-x {
+    border-color: var(--role-x);
+    color: var(--role-x);
+}
+
+.role-pill.role-ignore {
+    border-color: var(--border);
+    color: var(--muted);
+}
+
+.mapping-example {
+    margin-bottom: 10px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: var(--surface2);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    overflow-x: auto;
+    padding: 8px 10px;
+}
+
+.mapping-example-picker {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.example-prefix,
+.example-token-btn {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface2);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 3px 10px;
+}
+
+.example-token-btn {
+    cursor: pointer;
+    transition: border-color .15s, color .15s, background .15s;
+}
+
+.example-token-btn:hover {
+    border-color: var(--accent);
+}
+
+.example-token-btn.role-subtype {
+    border-color: var(--role-subtype);
+    background: rgba(var(--role-subtype-rgb), .14);
+    color: var(--role-subtype);
+}
+
+.example-token-btn.role-series {
+    border-color: var(--role-series);
+    background: rgba(var(--role-series-rgb), .14);
+    color: var(--role-series);
+}
+
+.example-token-btn.role-x {
+    border-color: var(--role-x);
+    background: rgba(var(--role-x-rgb), .14);
+    color: var(--role-x);
+}
+
+.example-token-btn.role-ignore {
+    border-color: var(--border);
+    background: var(--surface2);
+    color: var(--muted);
+}
+
+.example-token-btn[data-role-label]::after {
+    content: attr(data-role-label);
+    margin-left: 6px;
+    font-size: 9px;
+    letter-spacing: .06em;
+    opacity: .9;
+}
+
+.example-sep {
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+}
+
+.mapping-role-pop {
+    position: absolute;
+    z-index: 110;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 170px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    box-shadow: 0 12px 32px rgba(2, 6, 23, .5);
+    padding: 6px;
+}
+
+.mapping-role-pop-btn {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface2);
+    color: var(--text);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 5px 8px;
+    text-align: left;
+}
+
+.mapping-role-pop-btn:hover,
+.mapping-role-pop-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.mapping-role-pop-btn.role-subtype.active {
+    border-color: #60a8f0;
+    color: #60a8f0;
+}
+
+.mapping-role-pop-btn.role-series.active {
+    border-color: #f06060;
+    color: #f06060;
+}
+
+.mapping-role-pop-btn.role-x.active {
+    border-color: #f0c040;
+    color: #f0c040;
+}
+
+/* Hover should reflect assigned role color rather than generic accent */
+.example-token-btn.role-subtype:hover {
+        border-color: var(--role-subtype);
+        color: var(--role-subtype);
+        background: rgba(var(--role-subtype-rgb), .18);
+}
+.example-token-btn.role-series:hover {
+        border-color: var(--role-series);
+        color: var(--role-series);
+        background: rgba(var(--role-series-rgb), .16);
+}
+.example-token-btn.role-x:hover {
+        border-color: var(--role-x);
+        color: var(--role-x);
+        background: rgba(var(--role-x-rgb), .16);
+}
+
+.mapping-role-pop-btn.role-subtype:hover,
+.mapping-role-pop-btn.role-subtype.active {
+        border-color: var(--role-subtype);
+        color: var(--role-subtype);
+}
+.mapping-role-pop-btn.role-series:hover,
+.mapping-role-pop-btn.role-series.active {
+        border-color: var(--role-series);
+        color: var(--role-series);
+}
+.mapping-role-pop-btn.role-x:hover,
+.mapping-role-pop-btn.role-x.active {
+        border-color: var(--role-x);
+        color: var(--role-x);
+}
+
+.mapping-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 0;
+}
+
+.mapping-actions .file-btn {
+    margin-top: 0;
+}
+
+.subtype-filter-bar {
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: var(--surface2);
+    padding: 8px 10px;
+}
+
+.subtype-filter-bar label {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.subtype-filter-bar select {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 2px 6px;
+}

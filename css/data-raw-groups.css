@@ -1,0 +1,110 @@
+/* Raw Group Tree */
+
+.raw-groups {
+    margin-top: 12px;
+}
+
+.raw-groups-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.raw-groups-head .table-section-title {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.raw-group-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.raw-toggle-all {
+    min-height: 30px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface2);
+    color: var(--muted);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1;
+    padding: 6px 10px;
+}
+
+.raw-toggle-all:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.raw-toggle-all:disabled {
+    border-color: var(--border);
+    color: var(--muted);
+    cursor: default;
+    opacity: .5;
+}
+
+.raw-group-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.raw-group {
+    border-radius: 8px;
+    margin: 0;
+    overflow: hidden;
+}
+
+.raw-group > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    cursor: pointer;
+    list-style: none;
+    padding: 10px 12px;
+}
+
+.raw-group > summary::-webkit-details-marker {
+    display: none;
+}
+
+.raw-group-name {
+    color: var(--text);
+}
+
+.raw-group-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.raw-group-count {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 11px;
+    padding: 2px 8px;
+}
+
+.raw-tree-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 12px;
+}
+
+.raw-tree-node > .raw-tree-body {
+    margin-left: 0;
+    padding: 10px 0 10px 12px;
+}
+
+.raw-tree-leaf .table-wrap {
+    margin-top: 8px;
+    margin-bottom: 0;
+}

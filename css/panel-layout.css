@@ -1,0 +1,80 @@
+/* Panel Layout */
+
+.panel {
+    display: none;
+}
+
+.panel.active {
+    display: block;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+    color: var(--text);
+    font-size: 13px;
+}
+
+.controls select {
+    background: var(--surface);
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+/* Summary Metrics */
+.stats-row,
+.summary-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.stat-card,
+.metric {
+    flex: 1;
+    min-width: 140px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+}
+
+.stat-card .label,
+.metric-label {
+    margin-bottom: 4px;
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.stat-card .value,
+.metric-value {
+    margin-top: 4px;
+    color: var(--accent);
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.metric-sub {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* Motion */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

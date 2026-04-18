@@ -1,0 +1,29 @@
+/* Shared UI Utilities */
+
+/*
+ * Utility extraction for repeated control and surface primitives.
+ * These selectors intentionally target existing component classes so
+ * no HTML/JS class changes are required.
+ */
+:where(
+    .controls select,
+    .mapping-ydata select,
+    .subtype-filter-bar select,
+    .scatter-pair-field select,
+    .label-input
+) {
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--font-mono);
+}
+
+:where(
+    .chart-card,
+    .table-wrap,
+    .raw-group,
+    .label-editor,
+    .scatter-pair-dialog
+) {
+    background: var(--surface);
+    border: 1px solid var(--border);
+}

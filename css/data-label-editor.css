@@ -1,0 +1,65 @@
+/* Label Editor Modal */
+
+.label-editor-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(11, 14, 20, 0.6);
+}
+
+.label-editor {
+    width: min(720px, 92%);
+    max-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+    color: var(--text);
+    overflow: auto;
+    padding: 18px;
+}
+
+.label-editor h3 {
+    margin-bottom: 12px;
+    font-family: var(--font-head);
+}
+
+.label-section {
+    margin-bottom: 12px;
+    border-top: 1px dashed var(--border);
+    padding-top: 10px;
+}
+
+.label-section h4 {
+    margin-bottom: 8px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.label-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.label-key {
+    width: 36%;
+    color: var(--muted);
+    font-family: var(--font-mono);
+}
+
+.label-input {
+    flex: 1;
+    border-radius: 6px;
+    background: var(--surface2);
+    padding: 8px 10px;
+}
+
+.label-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+}
