@@ -4,8 +4,8 @@
 const toggle = document.getElementById('readme-theme-toggle');
 if (toggle) {
     const applyState = (isLight) => {
-        if (isLight) document.body.classList.add('light');
-        else document.body.classList.remove('light');
+        document.body.classList.toggle('light', isLight);
+        document.documentElement.classList.toggle('light', isLight);
         toggle.textContent = isLight ? '🌞 Light' : '🌙 Dark';
         toggle.setAttribute('aria-pressed', isLight ? 'true' : 'false');
     };
