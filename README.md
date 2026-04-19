@@ -129,4 +129,4 @@ Top-level layout:
 
 ## License
 
-See `LICENSE`.
+See [LICENSE](LICENSE) for details.
