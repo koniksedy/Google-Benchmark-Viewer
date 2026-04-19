@@ -56,6 +56,7 @@ export function buildPanel(group, runs, compareRuns = []) {
         scatterPair: null,
         scatterPairPrompting: false,
         hiddenLegendByGraph: new Map(),
+        ignoredSegIdxs: new Set(),
     };
 
     try {
@@ -106,11 +107,13 @@ export function buildPanel(group, runs, compareRuns = []) {
         const normalized = normalizeRoleAssignments(maxSegments, roles);
         let xIdx = -1;
         let seriesIdx = -1;
+        const ignoredSegIdxs = new Set();
         const subtypeDefs = [];
 
         normalized.forEach((r, i) => {
             if (r === 'x') xIdx = i;
             else if (r === 'series') seriesIdx = i;
+            else if (r === 'ignore') ignoredSegIdxs.add(i);
             else {
                 const m = r.match(/^subtype(\d+)$/);
                 if (m) subtypeDefs.push({ idx: i, level: Number(m[1]) });
@@ -122,6 +125,7 @@ export function buildPanel(group, runs, compareRuns = []) {
         state.depth = subtypeDefs.length;
         state.xSource = xIdx >= 0 ? `seg:${xIdx}` : 'auto';
         state.seriesSource = seriesIdx >= 0 ? `seg:${seriesIdx}` : 'none';
+        state.ignoredSegIdxs = ignoredSegIdxs;
         state.subtypeSelections = {};
 
         setRoleAssignments(normalized);
@@ -157,9 +161,9 @@ export function buildPanel(group, runs, compareRuns = []) {
             render,
         });
 
-        const inferred = inferSources(filteredRuns, state.depth, maxArgs);
+        const inferred = inferSources(filteredRuns, state.depth, maxArgs, state.ignoredSegIdxs);
         const xSource = state.xSource === 'auto' ? inferred.xSource : state.xSource;
-        const xInfo = axisInfoFromSource(filteredRuns, xSource, state.depth, group);
+        const xInfo = axisInfoFromSource(filteredRuns, xSource, state.depth, group, state.ignoredSegIdxs);
         const xLogAvailable = (xInfo.isNumeric && xInfo.hasPositiveValues)
             || state.graphType === 'scatter'
             || state.graphType === 'cactus';
@@ -179,7 +183,7 @@ export function buildPanel(group, runs, compareRuns = []) {
                 const seen = new Set();
                 const addFromRuns = (srcRuns, source) => {
                     (srcRuns || []).forEach(r => {
-                        const raw = valueForSource(r, seriesSource, state.depth, group);
+                        const raw = valueForSource(r, seriesSource, state.depth, group, state.ignoredSegIdxs);
                         const sRaw = raw == null ? '' : String(raw);
                         const seriesKey = sRaw === '' ? '(none)' : sRaw;
                         const value = `${source}::${seriesKey}`;

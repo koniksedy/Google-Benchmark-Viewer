@@ -247,6 +247,11 @@
         color: var(--role-x);
         background: rgba(var(--role-x-rgb), .16);
 }
+.example-token-btn.role-ignore:hover {
+    border-color: var(--border);
+    color: var(--muted);
+    background: var(--surface2);
+}
 
 .mapping-role-pop-btn.role-subtype:hover,
 .mapping-role-pop-btn.role-subtype.active {
@@ -262,6 +267,11 @@
 .mapping-role-pop-btn.role-x.active {
         border-color: var(--role-x);
         color: var(--role-x);
+}
+.mapping-role-pop-btn.role-ignore:hover,
+.mapping-role-pop-btn.role-ignore.active {
+    border-color: var(--border);
+    color: var(--muted);
 }
 
 .mapping-actions {

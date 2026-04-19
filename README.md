@@ -119,7 +119,6 @@ Top-level layout:
 - `js/panels/`: mapping studio, chart-grid builders, filters, raw table.
 - `js/charts/`: Chart.js wrappers and theme helpers.
 - `js/utils/`: parsing and formatting utilities.
-- `results/`: sample benchmark JSON files.
 
 ## Development Notes
 

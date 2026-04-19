@@ -7,6 +7,7 @@ export function roleClass(role) {
     if (role && role.startsWith('subtype')) return 'role-subtype';
     if (role === 'series') return 'role-series';
     if (role === 'x') return 'role-x';
+    if (role === 'ignore') return 'role-ignore';
     return 'role-subtype';
 }
 
@@ -23,6 +24,9 @@ export function normalizeRoles(maxSegments, roles) {
     if (seriesIdx === xIdx) seriesIdx = -1;
 
     const out = Array.from({ length: maxSegments }, () => '');
+    inRoles.forEach((role, i) => {
+        if (role === 'ignore') out[i] = 'ignore';
+    });
     if (xIdx >= 0) out[xIdx] = 'x';
     if (seriesIdx >= 0) out[seriesIdx] = 'series';
 
@@ -95,6 +99,12 @@ export function rolesFromState(maxSegments, state) {
     if (state.xSource.startsWith('seg:')) {
         const i = Number(state.xSource.slice(4));
         if (!isNaN(i) && i >= 0 && i < maxSegments) roles[i] = 'x';
+    }
+
+    if (state.ignoredSegIdxs instanceof Set) {
+        state.ignoredSegIdxs.forEach(i => {
+            if (!isNaN(i) && i >= 0 && i < maxSegments) roles[i] = 'ignore';
+        });
     }
 
     return normalizeRoles(maxSegments, roles);

@@ -20,6 +20,9 @@ export function buildTable(runs, opts = {}) {
     const xSource = opts.xSource || null;
     const roles = Array.isArray(opts.roles) ? opts.roles : null;
     const xIdxFromRoles = roles ? roles.findIndex(r => r === 'x') : -1;
+    const ignoredIdxsFromRoles = roles
+        ? new Set(roles.map((r, i) => (r === 'ignore' ? i : -1)).filter(i => i >= 0))
+        : new Set();
     const xIdxFromSource = xSource && xSource.startsWith('seg:') ? Number(xSource.slice(4)) : -1;
     const skipSegIdx = xIdxFromRoles >= 0 ? xIdxFromRoles : (xIdxFromSource >= 0 ? xIdxFromSource : null);
     const metricKey = opts.metric || 'cpu_time_ns';
@@ -52,6 +55,7 @@ export function buildTable(runs, opts = {}) {
 
         for (let i = 0; i < segs.length; i += 1) {
             if (skipSegIdx != null && i === skipSegIdx) continue;
+            if (ignoredIdxsFromRoles.has(i)) continue;
             if (segs[i] == null || segs[i] === '') continue;
             parts.push(String(segs[i]));
         }

@@ -15,8 +15,8 @@ function buildPoints({ runs, state, xSource, seriesSource, group }) {
     }
 
     return (runs || []).map(run => {
-        const rawX = valueForSource(run, xSource, state.depth, group);
-        const rawS = seriesSource === 'none' ? '' : valueForSource(run, seriesSource, state.depth, group);
+        const rawX = valueForSource(run, xSource, state.depth, group, state.ignoredSegIdxs);
+        const rawS = seriesSource === 'none' ? '' : valueForSource(run, seriesSource, state.depth, group, state.ignoredSegIdxs);
         const xKey = rawX == null ? null : String(rawX);
         const xDisplay = applyOverride(xSource, xKey);
         const sRaw = rawS == null ? '' : String(rawS);
@@ -102,7 +102,7 @@ export function prepareChartGridData({
     const compareLookup = new Map();
     for (const p of comparePoints) compareLookup.set(`${p.sKey}|${p.xKey}`, p.y);
 
-    const xInfo = axisInfoFromSource(runsSubset, xSource, state.depth, group);
+    const xInfo = axisInfoFromSource(runsSubset, xSource, state.depth, group, state.ignoredSegIdxs);
     const xIsNumeric = xInfo.isNumeric;
     const xCanLog = xInfo.hasPositiveValues;
     const xNumericValues = xKeys.map(k => parseNumericValue(k));

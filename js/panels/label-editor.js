@@ -7,16 +7,16 @@ import { inferSources, valueForSource, sortLabels } from './source-utils.js';
 
 export function openLabelEditor({ group, runs, state, maxArgs, render }) {
     const subset = runs;
-    const inferred = inferSources(subset, state.depth, maxArgs);
+    const inferred = inferSources(subset, state.depth, maxArgs, state.ignoredSegIdxs);
     const xSource = state.xSource === 'auto' ? inferred.xSource : state.xSource;
     const seriesSource = state.seriesSource === 'auto' ? inferred.seriesSource : state.seriesSource;
 
     const xVals = sortLabels(subset.map(r => {
-        const v = valueForSource(r, xSource, state.depth, group);
+        const v = valueForSource(r, xSource, state.depth, group, state.ignoredSegIdxs);
         return v == null ? '' : String(v);
     }));
     const sVals = seriesSource === 'none' ? [] : sortLabels(subset.map(r => {
-        const v = valueForSource(r, seriesSource, state.depth, group);
+        const v = valueForSource(r, seriesSource, state.depth, group, state.ignoredSegIdxs);
         return v == null ? '' : String(v);
     }));
 

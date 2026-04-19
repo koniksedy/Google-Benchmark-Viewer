@@ -33,6 +33,38 @@ function readBenchmarkFile(file) {
     }, 'Could not parse JSON');
 }
 
+async function pickBenchmarkFile() {
+    if (window.showOpenFilePicker) {
+        const [handle] = await window.showOpenFilePicker({
+            multiple: false,
+            startIn: 'documents',
+            types: [{
+                description: 'Google Benchmark JSON',
+                accept: { 'application/json': ['.json'] },
+            }],
+        });
+        if (!handle) return null;
+        return handle.getFile();
+    }
+
+    return new Promise(resolve => {
+        const input = document.getElementById('file-input');
+        if (!input) {
+            resolve(null);
+            return;
+        }
+
+        const onChange = () => {
+            input.removeEventListener('change', onChange);
+            resolve(input.files && input.files[0] ? input.files[0] : null);
+        };
+
+        input.addEventListener('change', onChange, { once: true });
+        input.value = '';
+        input.click();
+    });
+}
+
 function readCompareFile(file) {
     readJsonFile(file, compareData => {
         if (!viewerState.baseData) {
@@ -62,12 +94,26 @@ function readCompareFile(file) {
 }
 
 function wireFileInputs() {
+    const chooseFileBtn = document.getElementById('choose-file-btn');
     const fileInput = document.getElementById('file-input');
     const dropZone = document.getElementById('drop-zone');
 
-    fileInput.addEventListener('change', e => {
-        if (e.target.files[0]) readBenchmarkFile(e.target.files[0]);
-    });
+    if (chooseFileBtn) {
+        chooseFileBtn.addEventListener('click', async () => {
+            try {
+                const file = await pickBenchmarkFile();
+                if (file) readBenchmarkFile(file);
+            } catch (err) {
+                alert(`Could not open file picker: ${err && err.message ? err.message : err}`);
+            }
+        });
+    }
+
+    if (fileInput) {
+        fileInput.addEventListener('change', e => {
+            if (e.target.files[0]) readBenchmarkFile(e.target.files[0]);
+        });
+    }
 
     dropZone.addEventListener('dragover', e => {
         e.preventDefault();

@@ -6,9 +6,18 @@
 import { parseName } from '../utils/bench.js';
 import { parseNumericValue } from '../utils/number.js';
 
-export function inferSources(runsSubset, depth, maxArgs) {
+function toIgnoredSet(ignoredSegIdxs) {
+    return ignoredSegIdxs instanceof Set ? ignoredSegIdxs : new Set();
+}
+
+function effectiveSegments(segments, ignoredSegIdxs) {
+    const ignored = toIgnoredSet(ignoredSegIdxs);
+    return (segments || []).filter((_, i) => !ignored.has(i));
+}
+
+export function inferSources(runsSubset, depth, maxArgs, ignoredSegIdxs) {
     const rows = runsSubset.map(r => parseName(r.name));
-    const tails = rows.map(p => (p.segments || []).slice(depth));
+    const tails = rows.map(p => effectiveSegments(p.segments, ignoredSegIdxs).slice(depth));
     const hasTail = tails.some(t => t.length > 0);
 
     if (hasTail) {
@@ -33,12 +42,15 @@ export function inferSources(runsSubset, depth, maxArgs) {
     return { xSource: 'name', seriesSource: 'none' };
 }
 
-export function valueForSource(run, source, depth, group) {
+export function valueForSource(run, source, depth, group, ignoredSegIdxs) {
     const parsed = parseName(run.name);
     const segs = parsed.segments || [];
-    const tail = segs.slice(depth);
+    const tail = effectiveSegments(segs, ignoredSegIdxs).slice(depth);
 
-    if (source === 'name') return run.name.replace(group + '/', '') || group;
+    if (source === 'name') {
+        const visibleName = tail.join('/');
+        return visibleName || group;
+    }
     if (source === 'tail:last') return tail.length ? tail[tail.length - 1] : null;
     if (source === 'tail:prev') return tail.length >= 2 ? tail[tail.length - 2] : null;
 
@@ -63,9 +75,9 @@ export function sortLabels(values) {
         : uniq.sort((a, b) => a.localeCompare(b));
 }
 
-export function axisInfoFromSource(runsSubset, source, depth, group) {
+export function axisInfoFromSource(runsSubset, source, depth, group, ignoredSegIdxs) {
     const rawValues = runsSubset
-        .map(r => valueForSource(r, source, depth, group))
+        .map(r => valueForSource(r, source, depth, group, ignoredSegIdxs))
         .filter(v => v != null && v !== '');
 
     const numericValues = rawValues.map(parseNumericValue).filter(v => v != null);

@@ -23,7 +23,7 @@ export function buildChartGrid({
     render,
 }) {
     if (!runsSubset.length && !(compareRunsSubset && compareRunsSubset.length)) return null;
-    const inferred = inferSources(runsSubset, state.depth, maxArgs);
+    const inferred = inferSources(runsSubset, state.depth, maxArgs, state.ignoredSegIdxs);
     const xSource = state.xSource === 'auto' ? inferred.xSource : state.xSource;
     const seriesSource = state.seriesSource === 'auto' ? inferred.seriesSource : state.seriesSource;
     const metricLabel = state.metric === 'cpu_time_ns' ? 'CPU time' : 'Wall time';

@@ -58,7 +58,8 @@ export function createMappingStudio({
     roleLegend.innerHTML =
         '<span class="role-pill role-subtype">Subtype N</span>' +
         '<span class="role-pill role-series">Series</span>' +
-        '<span class="role-pill role-x">X axis</span>';
+        '<span class="role-pill role-x">X axis</span>' +
+        '<span class="role-pill role-ignore">Ignore</span>';
     mappingControls.appendChild(roleLegend);
 
     const sampleEl = document.createElement('div');
@@ -122,6 +123,7 @@ export function createMappingStudio({
         }
         opts.push(['series', 'Series']);
         opts.push(['x', 'X axis']);
+        opts.push(['ignore', 'Ignore']);
         return opts;
     }
 
@@ -140,8 +142,8 @@ export function createMappingStudio({
             btn.addEventListener('click', () => {
                 const next = [...roleAssignments];
                 const curr = next[idx];
-                // If target role is already assigned, swap the two token roles.
-                if (value !== curr) {
+                // Keep only X and Series unique; Ignore and Subtype can be assigned multiple times.
+                if (value !== curr && (value === 'x' || value === 'series')) {
                     const otherIdx = next.findIndex(r => r === value);
                     if (otherIdx !== -1) next[otherIdx] = curr;
                 }
