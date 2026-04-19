@@ -64,6 +64,8 @@
     margin-top: 4px;
     color: var(--muted);
     font-size: 11px;
+    overflow-wrap: anywhere;
+    min-width: 0;
 }
 
 /* Motion */

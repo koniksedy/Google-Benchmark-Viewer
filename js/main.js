@@ -79,9 +79,6 @@ function wireFileInputs() {
         dropZone.classList.remove('over');
         if (e.dataTransfer.files[0]) readBenchmarkFile(e.dataTransfer.files[0]);
     });
-    dropZone.addEventListener('click', e => {
-        if (e.target.tagName !== 'BUTTON') fileInput.click();
-    });
 }
 
 function wireCompareButton() {
